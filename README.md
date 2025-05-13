@@ -29,10 +29,20 @@ To run this code, please install PyTorch and Pytorch Lightning (we tested the co
   
 
 ## Setup   
+Setup Environment using Conda
+```bash
+# setup conda environment
+conda env create -f requirements.yml -n advanced_grapher_env
+
+# activate conda environment
+conda activate advanced_grapher_env
+
+```
+
 Install dependencies   
 ```bash
 # clone project   
-git clone git@github.com:IBM/Grapher.git
+git clone git@github.com:jinho-choi123/advanced-Grapher.git
 
 # navigate to the directory
 cd Grapher
