@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-cd ../
 python main.py    --version 1\
                   --default_root_dir output \
                   --run train \
                   --max_epochs 100 \
                   --accelerator gpu \
                   --num_nodes 1 \
-                  --num_data_workers 4 \
+                  --devices 1 \
+                  --num_data_workers 8 \
                   --lr 1e-4 \
                   --batch_size 11 \
                   --num_sanity_val_steps 0 \
