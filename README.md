@@ -54,14 +54,11 @@ git clone https://gitlab.com/shimorina/webnlg-dataset.git
 ## How to train
 There are two scripts to run two versions of the algorithm
 ```bash
-# naviagate to scripts directory
-cd scripts
-
 # run Grapher with the edge generation head
-bash train_gen.sh
+sh scripts/train_gen.sh
 
 # run Grapher with the classifier edge head
-bash train_class.sh
+sh scripts/train_class.sh
 ```
 
 ## How to test
