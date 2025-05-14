@@ -49,10 +49,17 @@ class RGCNLayer(nn.Module):
         return output
 
 class RelationalGCN(nn.Module):
-    def __init__(self, hidden_dim, num_rels, rgcn_layers_num=2):
+    def __init__(self, input_dim, output_dim, hidden_dim, num_rels, rgcn_layers_num=2):
         super().__init__()
 
+        assert input_dim == output_dim
+
+        self.input_dim = input_dim
+        self.output_dim = output_dim
         self.hidden_dim = hidden_dim
+        self.encoding_layer = nn.Parameter(torch.Tensor(input_dim, hidden_dim))
+        self.decoding_layer = nn.Parameter(torch.Tensor(hidden_dim, output_dim))
+
         self.rgcn_layers = nn.ModuleList([
             RGCNLayer(hidden_dim, hidden_dim, num_rels) for _ in range(rgcn_layers_num)
         ])
@@ -60,7 +67,10 @@ class RelationalGCN(nn.Module):
     def forward(self, node_features, adj_list, rel_type):
         # node_features shape: node_num x batch_size x hidden_dim
         # adj_list shape: batch_size x node_num x node_num
+        encoded_node_features = torch.matmul(node_features, self.encoding_layer)
         for rgcn in self.rgcn_layers:
-            node_features = rgcn(node_features, adj_list, rel_type)
+            encoded_node_features = rgcn(encoded_node_features, adj_list, rel_type)
+
+        node_features = torch.matmul(encoded_node_features, self.decoding_layer)
 
         return node_features

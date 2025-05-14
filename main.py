@@ -74,6 +74,7 @@ def main(args):
                              eval_dir=args.eval_dir,
                              lr=args.lr,
                              add_rgcn=args.add_rgcn,
+                             rgcn_hidden_dim=args.rgcn_hidden_dim,
                              rgcn_layers_num=args.rgcn_layers_num)
 
         if not os.path.exists(checkpoint_model_path):
@@ -171,6 +172,7 @@ if __name__ == "__main__":
                         default=512)
     parser.add_argument("--rgcn_layers_num", type=int,
                         default=2)
+    parser.add_argument("--rgcn_hidden_dim", type=int, default=128)
     parser.add_argument("--add-rgcn", action='store_true')
 
 

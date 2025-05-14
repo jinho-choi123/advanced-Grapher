@@ -56,7 +56,8 @@ class LitGrapher(pl.LightningModule):
                  eval_dir,
                  lr,
                  add_rgcn,
-                 rgcn_layers_num
+                 rgcn_hidden_dim,
+                 rgcn_layers_num,
                  ):
         super().__init__()
         self.save_hyperparameters()
@@ -73,7 +74,7 @@ class LitGrapher(pl.LightningModule):
                             num_layers=num_layers,
                             vocab_size=vocab_size,
                             bos_token_id=bos_token_id)
-        self.rgcn = RelationalGCN(self.grapher.hidden_dim, num_classes, rgcn_layers_num)
+        self.rgcn = RelationalGCN(self.grapher.hidden_dim, self.grapher.hidden_dim, rgcn_hidden_dim, num_classes, rgcn_layers_num)
 
         if add_rgcn:
             # when training rgcn
