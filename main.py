@@ -7,6 +7,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 import os
 from pytorch_lightning.callbacks import ModelCheckpoint, RichProgressBar
 from misc.utils import decode_graph
+import pprint
 
 def main(args):
 
@@ -71,7 +72,9 @@ def main(args):
                              edge_classes=dm.dataset_train.edge_classes,
                              focal_loss_gamma=args.focal_loss_gamma,
                              eval_dir=args.eval_dir,
-                             lr=args.lr)
+                             lr=args.lr,
+                             add_rgcn=args.add_rgcn,
+                             rgcn_layers_num=args.rgcn_layers_num)
 
         if not os.path.exists(checkpoint_model_path):
             checkpoint_model_path = None
@@ -166,10 +169,15 @@ if __name__ == "__main__":
                         default='Danielle Harris had a main role in Super Capers, a 98 minute long movie.')
     parser.add_argument("--model_max_length", type=int,
                         default=512)
+    parser.add_argument("--rgcn_layers_num", type=int,
+                        default=2)
+    parser.add_argument("--add-rgcn", action='store_true')
 
 
     parser = pl.Trainer.add_argparse_args(parser)
 
     args = parser.parse_args()
+    pprint.pp(f"arguments: \n{args}")
+
 
     main(args)

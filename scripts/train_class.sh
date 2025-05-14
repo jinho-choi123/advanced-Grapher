@@ -2,7 +2,7 @@
 python main.py    --version 1\
                   --default_root_dir output \
                   --run train \
-                  --max_epochs 200 \
+                  --max_epochs 100 \
                   --accelerator gpu \
                   --num_nodes 1 \
                   --devices "0," \
@@ -15,7 +15,7 @@ python main.py    --version 1\
                   --limit_train_batches 1.0 \
                   --limit_val_batches 1.0 \
                   --limit_test_batches 1.0 \
-                  --accumulate_grad_batches 5 \
+                  --accumulate_grad_batches 2 \
                   --detect_anomaly True \
                   --data_path webnlg-dataset/release_v3.0/en \
                   --log_every_n_steps 100 \
@@ -26,3 +26,8 @@ python main.py    --version 1\
                   --num_layers 2 \
                   --edges_as_classes 1 \
                   --checkpoint_model_id -1 \
+                  --precision "bf16" \
+                  --add-rgcn  \
+
+
+                  # set add_rgcn flag if you want to train rgcn

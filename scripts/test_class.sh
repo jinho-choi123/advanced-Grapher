@@ -28,3 +28,8 @@ python main.py    --version 1\
                   --num_layers 2 \
                   --edges_as_classes 1 \
                   --checkpoint_model_id 4000 \
+                  --precision "bf16" \
+                  --add-rgcn  \
+
+
+                  # set add_rgcn flag if you want to test with rgcn added

@@ -9,7 +9,6 @@ failed_node = 'failed node'
 failed_edge = 'failed edge'
 nonode_str = '__no_node__'
 
-
 def compute_loss(criterion, logits_nodes, logits_edges, target_nodes, target_edges, edges_as_classes, focal_loss_gamma):
 
     # --------- Node Loss ---------

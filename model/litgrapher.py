@@ -1,3 +1,5 @@
+from model.advancedgrapher import AdvancedGrapher
+from model.rgcn import RelationalGCN
 import torch
 import pytorch_lightning as pl
 from misc.utils import compute_loss, decode_text, decode_graph, compute_scores
@@ -53,22 +55,38 @@ class LitGrapher(pl.LightningModule):
                  focal_loss_gamma,
                  eval_dir,
                  lr,
+                 add_rgcn,
+                 rgcn_layers_num
                  ):
         super().__init__()
         self.save_hyperparameters()
 
-        model = Grapher(transformer_class=transformer_class,
-                        transformer_name=transformer_name,
-                        cache_dir=cache_dir,
-                        max_nodes=max_nodes,
-                        edges_as_classes=edges_as_classes,
-                        node_sep_id=node_sep_id,
-                        default_seq_len_edge=default_seq_len_edge,
-                        num_classes=num_classes,
-                        dropout_rate=dropout_rate,
-                        num_layers=num_layers,
-                        vocab_size=vocab_size,
-                        bos_token_id=bos_token_id)
+        self.grapher = Grapher(transformer_class=transformer_class,
+                            transformer_name=transformer_name,
+                            cache_dir=cache_dir,
+                            max_nodes=max_nodes,
+                            edges_as_classes=edges_as_classes,
+                            node_sep_id=node_sep_id,
+                            default_seq_len_edge=default_seq_len_edge,
+                            num_classes=num_classes,
+                            dropout_rate=dropout_rate,
+                            num_layers=num_layers,
+                            vocab_size=vocab_size,
+                            bos_token_id=bos_token_id)
+        self.rgcn = RelationalGCN(self.grapher.hidden_dim, num_classes, rgcn_layers_num)
+
+        if add_rgcn:
+            # when training rgcn
+            # turn off the grad engine for grapher
+            for parameter in self.grapher.parameters():
+                parameter.requires_grad = False
+            model = AdvancedGrapher(self.grapher, self.rgcn, noedge_cl)
+        else:
+            # when training grapher
+            # turn off the grad engine for rgcn
+            for parameter in self.rgcn.parameters():
+                parameter.requires_grad = False
+            model = self.grapher
 
         self.model = model
         self.criterion = {'ce': nn.CrossEntropyLoss(reduction='none'), 'focal': FocalLoss(focal_loss_gamma)}
@@ -88,6 +106,7 @@ class LitGrapher(pl.LightningModule):
         self.noedge_id = noedge_id
         self.eval_dir=eval_dir
         self.lr = lr
+        self.rgcn_layers_num = rgcn_layers_num
 
     def training_step(self, batch, batch_idx):
 

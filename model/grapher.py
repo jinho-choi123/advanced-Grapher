@@ -2,7 +2,6 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-
 class Grapher(nn.Module):
     def __init__(self,
                  transformer_class,
@@ -16,7 +15,7 @@ class Grapher(nn.Module):
                  dropout_rate,
                  num_layers,
                  vocab_size,
-                 bos_token_id
+                 bos_token_id,
                         ):
         super().__init__()
 
@@ -53,13 +52,12 @@ class Grapher(nn.Module):
         return split_features
 
     def forward(self, text, text_mask, target_nodes, target_nodes_mask, target_edges, output_hidden_states=False):
-
         # NODES
         output = self.transformer(input_ids=text,
-                                  attention_mask=text_mask,
-                                  decoder_input_ids=target_nodes,
-                                  decoder_attention_mask=target_nodes_mask,
-                                  output_hidden_states=True)
+                                attention_mask=text_mask,
+                                decoder_input_ids=target_nodes,
+                                decoder_attention_mask=target_nodes_mask,
+                                output_hidden_states=True)
 
         logits_nodes = output.logits  # batch_size x seq_len x vocab_size
         joint_features = output.decoder_hidden_states[-1]  # batch_size x seq_len x hidden_dim
@@ -70,8 +68,7 @@ class Grapher(nn.Module):
 
         # if return_hidden is set, then we return hidden embedding of node
         # This is because, we can easily derive hidden embedding of node-node connection. Please look at EdgeClass class for more infromation.
-        if output_hidden_states:
-            return features
+
 
         # EDGES
         if self.edges_as_classes:
@@ -80,7 +77,10 @@ class Grapher(nn.Module):
             seq_len_edge = target_edges.size(3)
             logits_edges = self.edges(features, seq_len_edge)
 
-        return logits_nodes, logits_edges
+        if output_hidden_states:
+            return logits_nodes, logits_edges, features
+        else:
+            return logits_nodes, logits_edges
 
     def sample(self, text, text_mask):
 
