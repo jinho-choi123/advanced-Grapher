@@ -52,7 +52,7 @@ class Grapher(nn.Module):
 
         return split_features
 
-    def forward(self, text, text_mask, target_nodes, target_nodes_mask, target_edges):
+    def forward(self, text, text_mask, target_nodes, target_nodes_mask, target_edges, output_hidden_states=False):
 
         # NODES
         output = self.transformer(input_ids=text,
@@ -68,9 +68,14 @@ class Grapher(nn.Module):
 
         features = self.split_nodes(gen_seq, joint_features)  # num_nodes x batch_size x hidden_dim
 
+        # if return_hidden is set, then we return hidden embedding of node
+        # This is because, we can easily derive hidden embedding of node-node connection. Please look at EdgeClass class for more infromation.
+        if output_hidden_states:
+            return features
+
         # EDGES
         if self.edges_as_classes:
-            logits_edges = self.edges(features)
+            logits_edges = self.edges(features, output_hidden_states=True)
         else:
             seq_len_edge = target_edges.size(3)
             logits_edges = self.edges(features, seq_len_edge)
@@ -97,7 +102,7 @@ class Grapher(nn.Module):
 
         seq_len_edge = self.default_seq_len_edge
 
-        # batch_size x hidden_dim x num_nodes
+        # num_nodes x batch_size x hidden_dim
         features = self.split_nodes(seq_nodes, joint_features)
 
         # EDGES
@@ -201,7 +206,7 @@ class EdgesClass(nn.Module):
             self.layers.add_module(f'dropout{l}', nn.Dropout(dropout_rate))
         self.layers.add_module('last', nn.Linear(dim, num_classes))
 
-    def forward(self, features):
+    def forward(self, features, output_hidden_states=False):
 
         # features: num_nodes X batch_size X hidden_dim
 
@@ -211,8 +216,12 @@ class EdgesClass(nn.Module):
         # num_nodes_valid X num_nodes_valid X batch_size X hidden_dim
         feats = features.unsqueeze(0).expand(num_nodes, -1, -1, -1)
 
-        # [featurs[i] - features[j]]: num_nodes_valid*num_nodes_valid*batch_size X hidden_dim
+        # [featurs[i] - features[j]]: (num_nodes_valid*num_nodes_valid*batch_size) X hidden_dim
         hidden = (feats.permute(1, 0, 2, 3) - feats).reshape(-1, self.hidden_dim)
+        if output_hidden_states:
+            # return hidden of connection between node pairs
+            # num_nodes_valid X num_nodes_valid X batch_size X hidden_dim
+            return hidden.reshape(num_nodes, num_nodes, batch_size, -1)
 
         # logits: num_nodes_valid*num_nodes_valid*batch_size X num_classes
         logits = self.layers(hidden)

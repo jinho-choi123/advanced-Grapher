@@ -35,7 +35,8 @@ def main(args):
                              num_data_workers=args.num_data_workers,
                              max_nodes=args.max_nodes,
                              max_edges=args.max_edges,
-                             edges_as_classes=args.edges_as_classes)
+                             edges_as_classes=args.edges_as_classes,
+                             model_max_length=args.model_max_length)
 
         dm.prepare_data()
         dm.setup(stage='fit')
@@ -82,7 +83,7 @@ def main(args):
         dm.setup(stage='validate')
 
         trainer.fit(model=grapher, datamodule=dm, ckpt_path=checkpoint_model_path)
-        
+
     elif args.run == 'test':
 
         assert os.path.exists(checkpoint_model_path), 'Provided checkpoint does not exists, cannot run the test'
@@ -98,7 +99,8 @@ def main(args):
                              num_data_workers=args.num_data_workers,
                              max_nodes=grapher.max_nodes,
                              max_edges=grapher.max_edges,
-                             edges_as_classes=grapher.edges_as_classes)
+                             edges_as_classes=grapher.edges_as_classes,
+                             model_max_length=args.model_max_length)
 
         dm.setup(stage='test')
 
@@ -112,11 +114,11 @@ def main(args):
 
         grapher = LitGrapher.load_from_checkpoint(checkpoint_path=checkpoint_model_path)
 
-        tokenizer = T5Tokenizer.from_pretrained(grapher.transformer_name, cache_dir=grapher.cache_dir)
+        tokenizer = T5Tokenizer.from_pretrained(grapher.transformer_name, cache_dir=grapher.cache_dir, model_max_length=args.model_max_length)
         tokenizer.add_tokens('__no_node__')
         tokenizer.add_tokens('__no_edge__')
         tokenizer.add_tokens('__node_sep__')
-        
+
         text_tok = tokenizer([args.inference_input_text],
                              add_special_tokens=True,
                              padding=True,
@@ -129,20 +131,20 @@ def main(args):
         dec_graph = decode_graph(tokenizer, grapher.edge_classes, seq_nodes, seq_edges, grapher.edges_as_classes,
                                 grapher.node_sep_id, grapher.max_nodes, grapher.noedge_cl, grapher.noedge_id,
                                 grapher.bos_token_id, grapher.eos_token_id)
-        
+
         graph_str = ['-->'.join(tri) for tri in dec_graph[0]]
-        
+
         print(f'Generated Graph: {graph_str}')
-        
-    
+
+
 if __name__ == "__main__":
-    
+
     # Parsing arguments
     parser = argparse.ArgumentParser(description='Arguments')
 
     parser.add_argument("--dataset", type=str, default='webnlg')
     parser.add_argument("--run", type=str, default='train')
-    parser.add_argument('--pretrained_model', type=str, default='t5-base')
+    parser.add_argument('--pretrained_model', type=str, default='t5-large')
     parser.add_argument('--version', type=str, default='0')
     parser.add_argument('--data_path', type=str, default='')
     parser.add_argument('--cache_dir', type=str, default='cache')
@@ -162,6 +164,9 @@ if __name__ == "__main__":
     parser.add_argument("--eval_dump_only", type=int, default=0)
     parser.add_argument("--inference_input_text", type=str,
                         default='Danielle Harris had a main role in Super Capers, a 98 minute long movie.')
+    parser.add_argument("--model_max_length", type=int,
+                        default=512)
+
 
     parser = pl.Trainer.add_argparse_args(parser)
 
