@@ -94,7 +94,9 @@ class Grapher(nn.Module):
 
         seq_nodes = output.sequences[:, 1:]
 
-        logits_nodes = output.scores  # list of seq_len of batch_size x vocab_size
+        logits_nodes = output.scores  # [batch_size x vocab_size] of length seq_len
+
+        # batch_size x seq_len x vocab_size
         logits_nodes = torch.cat([l.unsqueeze(0) for l in logits_nodes], 0).permute(1, 0, 2)
 
         # batch_size x seq_len x hidden_dim

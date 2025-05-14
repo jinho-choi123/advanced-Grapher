@@ -62,6 +62,11 @@ class LitGrapher(pl.LightningModule):
         super().__init__()
         self.save_hyperparameters()
 
+        # ASSERT
+        # We only use classifier for this project
+        if add_rgcn:
+            assert edges_as_classes == add_rgcn
+
         self.grapher = Grapher(transformer_class=transformer_class,
                             transformer_name=transformer_name,
                             cache_dir=cache_dir,
