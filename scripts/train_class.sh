@@ -27,7 +27,6 @@ python main.py    --version 1\
                   --edges_as_classes 1 \
                   --checkpoint_model_id -1 \
                   --precision "bf16" \
-                  --rgcn_hidden_dim 128 \
                   # --add-rgcn  \
 
 
