@@ -64,7 +64,8 @@ class Grapher(nn.Module):
 
         gen_seq = logits_nodes.argmax(-1)
 
-        features = self.split_nodes(gen_seq, joint_features)  # num_nodes x batch_size x hidden_dim
+        # num_nodes x batch_size x hidden_dim
+        features = self.split_nodes(gen_seq, joint_features)
 
         # if return_hidden is set, then we return hidden embedding of node
         # This is because, we can easily derive hidden embedding of node-node connection. Please look at EdgeClass class for more infromation.
@@ -109,6 +110,7 @@ class Grapher(nn.Module):
 
         # EDGES
         if self.edges_as_classes:
+            # num_nodes x num_nodes x batch_size x class_num
             logits_edges = self.edges(features)
         else:
             logits_edges = self.edges(features, seq_len_edge)

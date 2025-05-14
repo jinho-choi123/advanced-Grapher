@@ -31,18 +31,6 @@ class RGCNLayer(nn.Module):
 
             neighbor_count = torch.clamp(torch.sum(adj_list, dim=-1, keepdim=True), min=1)
 
-            # DEBUG
-
-            tmp1 = adj_list * mask # batch_size x node_nums x node_nums
-            tmp2 = torch.matmul(node_features, weight_r)
-            print(f"adj_list shape: {adj_list.shape}")
-            print(f"mask shape: {mask.shape}")
-            print(f"node_features: {node_features.shape}")
-            print(f"weight_r: {weight_r.shape}")
-            print(f"tmp1 shape: {tmp1.shape}")
-            print(f"tmp2 shape: {tmp2.shape}")
-            tmp3 = torch.matmul(tmp1, tmp2)
-
             weighted_sum = torch.matmul(adj_list * mask, torch.matmul(node_features, weight_r))
 
             output += weighted_sum / neighbor_count

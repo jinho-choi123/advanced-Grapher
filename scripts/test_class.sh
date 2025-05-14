@@ -16,7 +16,7 @@ python main.py    --version 1\
                   --overfit_batches 0 \
                   --limit_train_batches 1.0 \
                   --limit_val_batches 1.0 \
-                  --limit_test_batches 0.1 \
+                  --limit_test_batches 1.0 \
                   --accumulate_grad_batches 5 \
                   --detect_anomaly True \
                   --data_path webnlg-dataset/release_v3.0/en \

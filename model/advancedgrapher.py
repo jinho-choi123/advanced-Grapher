@@ -55,13 +55,14 @@ class AdvancedGrapher(nn.Module):
         # num_nodes x batch_size x hidden_dim
         features = self.grapher.split_nodes(seq_nodes, joint_features)
 
+
         # EDGES
         logits_edges = self.grapher.edges(features)
 
         # draw initial graph with logits_edges
         # rel_type: batch_size x num_nodes x num_nodes
         # adj_list: batch_size x num_nodes x num_nodes
-        rel_type = logits_edges.argmax(-1)
+        rel_type = logits_edges.permute(2, 0, 1, 3).argmax(-1)
 
         adj_list = (rel_type != self.noedge_cl)
 
