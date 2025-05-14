@@ -155,14 +155,19 @@ def compute_scores(hyp, ref, iteration, eval_dir, split, rank):
     categories = [' '] * len(refs)
 
     ref_fname, hyp_fname = save_webnlg_rdf(hyps, refs, categories, os.path.join(eval_dir, split), f'{iteration}_{rank}')
-
     scores_fname = os.path.join(eval_dir, split, f'scores_{iteration}_{rank}.json')
+    try:
+        Evaluation_script_json.main(ref_fname, hyp_fname, scores_fname)
+        if not os.path.exists(scores_fname):
+            raise FileNotFoundError(f"Score file not found: {scores_fname}")
 
-    Evaluation_script_json.main(ref_fname, hyp_fname, scores_fname)
-
-    scores = json.load(open(scores_fname))
-    scores = {'Precision': scores['Total_scores']['Exact']['Precision'],
-              'Recall': scores['Total_scores']['Exact']['Recall'],
-              'F1': scores['Total_scores']['Exact']['F1']}
+        with open(scores_fname, 'r') as f:
+            scores = json.load(f)
+        scores = {'Precision': scores['Total_scores']['Exact']['Precision'],
+                'Recall': scores['Total_scores']['Exact']['Recall'],
+                'F1': scores['Total_scores']['Exact']['F1']}
+    except Exception as e:
+        print(f"Error during compute_scores function: {str(e)}")
+        scores = {'Precision': 0.0, 'Recall': 0.0, 'F1': 0.0}
 
     return scores

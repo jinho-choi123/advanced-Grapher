@@ -171,6 +171,7 @@ class LitGrapher(pl.LightningModule):
 
         # hack to avoid crashing the program if evaluation fails
         try:
+            # DEBUG
             scores = compute_scores(dec_pred_all, dec_target_all, iteration, self.eval_dir, split, rank)
         except Exception:
             print("evaluation epoch crashed during calculating the scores")

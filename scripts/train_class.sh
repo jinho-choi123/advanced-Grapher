@@ -6,7 +6,7 @@ python main.py    --version 1\
                   --accelerator gpu \
                   --num_nodes 1 \
                   --devices "0," \
-                  --num_data_workers 64 \
+                  --num_data_workers 16 \
                   --lr 1e-4 \
                   --batch_size 10 \
                   --num_sanity_val_steps 0 \
