@@ -8,9 +8,9 @@ python main.py    --version 1\
                   --accelerator gpu \
                   --num_nodes 1 \
                   --devices "1," \
-                  --num_data_workers 16 \
+                  --num_data_workers 32 \
                   --lr 1e-4 \
-                  --batch_size 100 \
+                  --batch_size 50 \
                   --num_sanity_val_steps 0 \
                   --fast_dev_run 0 \
                   --overfit_batches 0 \
@@ -27,9 +27,10 @@ python main.py    --version 1\
                   --dropout_rate 0.5 \
                   --num_layers 2 \
                   --edges_as_classes 1 \
-                  --checkpoint_model_id 4000 \
+                  --checkpoint_model_id 3800 \
                   --precision "bf16" \
-                  --add-rgcn  \
+                  # --add-rgcn  \
 
 
                   # set add_rgcn flag if you want to test with rgcn added
+                  # if add_rgcn flag is set, we should reduce batch_size
