@@ -62,12 +62,12 @@ class LitGrapher(pl.LightningModule):
         super().__init__()
         self.save_hyperparameters()
 
-        # ASSERT
-        # We only use classifier for this project
+        # # ASSERT
+        # # We only use classifier for this project
         if add_rgcn:
             assert edges_as_classes == add_rgcn
 
-        self.grapher = Grapher(transformer_class=transformer_class,
+        grapher = Grapher(transformer_class=transformer_class,
                             transformer_name=transformer_name,
                             cache_dir=cache_dir,
                             max_nodes=max_nodes,
@@ -79,22 +79,9 @@ class LitGrapher(pl.LightningModule):
                             num_layers=num_layers,
                             vocab_size=vocab_size,
                             bos_token_id=bos_token_id)
-        self.rgcn = RelationalGCN(self.grapher.hidden_dim, self.grapher.hidden_dim, rgcn_hidden_dim, num_classes, rgcn_layers_num)
+        rgcn = RelationalGCN(grapher.hidden_dim, grapher.hidden_dim, rgcn_hidden_dim, num_classes, rgcn_layers_num)
 
-        if add_rgcn:
-            # when training rgcn
-            # turn off the grad engine for grapher
-            for parameter in self.grapher.parameters():
-                parameter.requires_grad = False
-            model = AdvancedGrapher(self.grapher, self.rgcn, noedge_cl)
-        else:
-            # when training grapher
-            # turn off the grad engine for rgcn
-            for parameter in self.rgcn.parameters():
-                parameter.requires_grad = False
-            model = self.grapher
-
-        self.model = model
+        self.model = AdvancedGrapher(grapher, rgcn, noedge_cl, add_rgcn)
         self.criterion = {'ce': nn.CrossEntropyLoss(reduction='none'), 'focal': FocalLoss(focal_loss_gamma)}
         self.tokenizer = tokenizer
         self.cache_dir = cache_dir
@@ -113,6 +100,7 @@ class LitGrapher(pl.LightningModule):
         self.eval_dir=eval_dir
         self.lr = lr
         self.rgcn_layers_num = rgcn_layers_num
+        self.add_rgcn = add_rgcn
 
     def training_step(self, batch, batch_idx):
 
@@ -124,11 +112,17 @@ class LitGrapher(pl.LightningModule):
         # logits_nodes: batch_size X seq_len_node X vocab_size
         # logits_edges: num_nodes X num_nodes X batch_size X seq_len_edge X vocab_size [FULL]
         # logits_edges: num_nodes X num_nodes X batch_size X num_classes [CLASSES]
-        logits_nodes, logits_edges= self.model(text_input_ids,
+
+
+        """logits_nodes, logits_edges= self.model(text_input_ids,
                                                text_input_attn_mask,
                                                target_nodes,
                                                target_nodes_mask,
-                                               target_edges)
+                                               target_edges)"""
+        if self.add_rgcn:
+            logits_nodes, logits_edges = self.model(text_input_ids, text_input_attn_mask, target_nodes, target_nodes_mask, target_edges)
+        else:
+            logits_nodes, logits_edges = self.model(text_input_ids, text_input_attn_mask, target_nodes, target_nodes_mask, target_edges)
 
         loss = compute_loss(self.criterion, logits_nodes, logits_edges, target_nodes,
                             target_edges, self.edges_as_classes, self.focal_loss_gamma)

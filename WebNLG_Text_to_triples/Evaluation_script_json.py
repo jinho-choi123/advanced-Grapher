@@ -491,12 +491,6 @@ def calculateSystemScore(totalsemevallist, totalsemevallistpertag, newreflist, n
     selectedsemevallistpertag = []
     alldicts = []
 
-    print(f"inside calculateSystemScore")
-    print(f"length of totalsemevallist: {len(totalsemevallist)}")
-    print(f"length of totalsemevallistpertag: {len(totalsemevallistpertag)}")
-    print(f"length of newreflist: {len(newreflist)}")
-    print(f"length of newcandlist: {len(newcandlist)}")
-
     # Get all the permutations of the number of scores given per candidate, so if there's 4 candidates, but 3 references, this part ensures that one of
     # The four will not be scored
     for idx, candidate in enumerate(newcandlist):
@@ -517,10 +511,8 @@ def calculateSystemScore(totalsemevallist, totalsemevallistpertag, newreflist, n
         else:
             choosescore = list(itertools.permutations([x[0] for x in enumerate(totalsemevallist[idx][0])], len(newcandlist[idx])))
             choosescore = [list(x) for x in choosescore]
-
         # Get all possible combinations between the candidates and the scores
         combilist = list(itertools.product(choosecands, choosescore))
-        print(f"length of combilist: {len(combilist)}")
 
         totaldict = {'totalscore': 0}
 
@@ -544,7 +536,6 @@ def calculateSystemScore(totalsemevallist, totalsemevallistpertag, newreflist, n
             if (combiscore > totaldict['totalscore']) or (len(totaldict) == 1):
                 totaldict = {'totalscore': combiscore, 'combination': combination, 'semevallist': collectedsemeval,
                              'semevalpertaglist': collectedsemevalpertag}
-
         selectedsemevallist = selectedsemevallist + totaldict['semevallist']
         selectedsemevallistpertag = selectedsemevallistpertag + totaldict['semevalpertaglist']
 
@@ -851,23 +842,11 @@ def calculateExactTripleScore(reflist, candlist, alldict):
 def main(reffile, candfile, outputfile):
     reflist, newreflist = getRefs(reffile)
     candlist, newcandlist = getCands(candfile)
-    print(f"before calculateAllScores")
-    start = time.time()
     totalsemevallist, totalsemevallistpertag = calculateAllScores(newreflist, newcandlist)
-    print(f"after calculateAllScores. time taken: {time.time() - start:.4f} seconds")
-    print(f"before calculateSystemScore")
-    start = time.time()
     alldict = calculateSystemScore(totalsemevallist, totalsemevallistpertag, newreflist, newcandlist)
-    print(f"after calculateSystemScore. time taken: {time.time() - start:.4f} seconds")
-    print(f"before calculateExactTripleScore")
-    start = time.time()
     alldict2 = calculateExactTripleScore(reflist, candlist, alldict)
-    print(f"after calculateExactTripleScore. time taken: {time.time() - start:.4f} seconds")
-    print(f"dumping to json")
-    start = time.time()
     with open(outputfile, 'w') as outfile:
         json.dump(alldict2, outfile)
-    print(f"dumping to json finished. time taken: {time.time() - start:.4f} seconds")
 
 #main(currentpath + '/Refs.xml', currentpath + '/Cands2.xml', currentpath + '/Results.json')
 if __name__ == '__main__':

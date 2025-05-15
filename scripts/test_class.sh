@@ -7,11 +7,11 @@ python main.py    --version 1\
                   --max_epochs 50 \
                   --accelerator gpu \
                   --num_nodes 1 \
-                  --devices "1," \
+                  --devices "0," \
                   --num_data_workers 32 \
                   --lr 1e-4 \
                   --batch_size 50 \
-                  --num_sanity_val_steps 0 \
+                  --num_sanity_val_steps 10 \
                   --fast_dev_run 0 \
                   --overfit_batches 0 \
                   --limit_train_batches 1.0 \
@@ -27,7 +27,7 @@ python main.py    --version 1\
                   --dropout_rate 0.5 \
                   --num_layers 2 \
                   --edges_as_classes 1 \
-                  --checkpoint_model_id 3800 \
+                  --checkpoint_model_id -1 \
                   --precision "bf16" \
                   # --add-rgcn  \
 
