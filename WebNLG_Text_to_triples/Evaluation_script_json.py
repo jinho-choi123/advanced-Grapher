@@ -845,7 +845,7 @@ def main(reffile, candfile, outputfile):
     totalsemevallist, totalsemevallistpertag = calculateAllScores(newreflist, newcandlist)
     alldict = calculateSystemScore(totalsemevallist, totalsemevallistpertag, newreflist, newcandlist)
     alldict2 = calculateExactTripleScore(reflist, candlist, alldict)
-    with open(outputfile, 'w') as outfile:
+    with open(outputfile, 'w+') as outfile:
         json.dump(alldict2, outfile)
 
 #main(currentpath + '/Refs.xml', currentpath + '/Cands2.xml', currentpath + '/Results.json')
