@@ -23,7 +23,7 @@ class AdvancedGrapher(nn.Module):
 
     def forward(self, text, text_mask, target_nodes, target_nodes_mask, target_edges, output_hidden_states=False):
 
-        if self.add_rgcn:
+        if not self.add_rgcn:
             return self.grapher(text, text_mask, target_nodes, target_nodes_mask, target_edges, False)
 
         # logits_edges: num_nodes x num_nodes x batch_size x num_classes
@@ -51,7 +51,7 @@ class AdvancedGrapher(nn.Module):
         return logits_nodes, logits_edges
 
     def sample(self, text, text_mask):
-        if self.add_rgcn:
+        if not self.add_rgcn:
             return self.grapher.sample(text, text_mask)
 
         output = self.grapher.transformer.generate(input_ids=text,
