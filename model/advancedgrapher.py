@@ -1,3 +1,5 @@
+from model.grapher import Grapher
+from model.rgcn import RelationalGCN
 import torch
 import torch.nn.functional as F
 from torch import nn
@@ -5,23 +7,31 @@ from torch import nn
 class AdvancedGrapher(nn.Module):
     def __init__(self, grapher, rgcn, noedge_cl, add_rgcn):
         super().__init__()
+
         self.grapher = grapher
         self.rgcn = rgcn
+
         self.noedge_cl = noedge_cl
         self.add_rgcn = add_rgcn
 
         if add_rgcn:
+            print("add_rgcn flagged.")
+            print("Freezed Grapher Model...")
+            print("Training RGCN Model...")
             # when training rgcn
             # turn off the grad engine for grapher
             for parameter in self.grapher.parameters():
                 parameter.requires_grad = False
         else:
+            print("add_rgcn not flagged.")
+            print("Freezed RGCN Model...")
+            print("Training Grapher Model...")
             # when training grapher
             # turn off the grad engine for rgcn
             for parameter in self.rgcn.parameters():
                 parameter.requires_grad = False
 
-    def forward(self, text, text_mask, target_nodes, target_nodes_mask, target_edges, output_hidden_states=False):
+    def forward(self, text, text_mask, target_nodes, target_nodes_mask, target_edges):
 
         if not self.add_rgcn:
             return self.grapher(text, text_mask, target_nodes, target_nodes_mask, target_edges, False)

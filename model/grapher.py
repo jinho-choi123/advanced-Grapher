@@ -73,7 +73,7 @@ class Grapher(nn.Module):
 
         # EDGES
         if self.edges_as_classes:
-            logits_edges = self.edges(features, output_hidden_states=True)
+            logits_edges = self.edges(features)
         else:
             seq_len_edge = target_edges.size(3)
             logits_edges = self.edges(features, seq_len_edge)
@@ -222,10 +222,6 @@ class EdgesClass(nn.Module):
 
         # [featurs[i] - features[j]]: (num_nodes_valid*num_nodes_valid*batch_size) X hidden_dim
         hidden = (feats.permute(1, 0, 2, 3) - feats).reshape(-1, self.hidden_dim)
-        if output_hidden_states:
-            # return hidden of connection between node pairs
-            # num_nodes_valid X num_nodes_valid X batch_size X hidden_dim
-            return hidden.reshape(num_nodes, num_nodes, batch_size, -1)
 
         # logits: num_nodes_valid*num_nodes_valid*batch_size X num_classes
         logits = self.layers(hidden)

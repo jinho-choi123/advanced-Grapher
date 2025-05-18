@@ -68,20 +68,21 @@ class LitGrapher(pl.LightningModule):
             assert edges_as_classes == add_rgcn
 
         grapher = Grapher(transformer_class=transformer_class,
-                            transformer_name=transformer_name,
-                            cache_dir=cache_dir,
-                            max_nodes=max_nodes,
-                            edges_as_classes=edges_as_classes,
-                            node_sep_id=node_sep_id,
-                            default_seq_len_edge=default_seq_len_edge,
-                            num_classes=num_classes,
-                            dropout_rate=dropout_rate,
-                            num_layers=num_layers,
-                            vocab_size=vocab_size,
-                            bos_token_id=bos_token_id)
+                                    transformer_name=transformer_name,
+                                    cache_dir=cache_dir,
+                                    max_nodes=max_nodes,
+                                    edges_as_classes=edges_as_classes,
+                                    node_sep_id=node_sep_id,
+                                    default_seq_len_edge=default_seq_len_edge,
+                                    num_classes=num_classes,
+                                    dropout_rate=dropout_rate,
+                                    num_layers=num_layers,
+                                    vocab_size=vocab_size,
+                                    bos_token_id=bos_token_id)
         rgcn = RelationalGCN(grapher.hidden_dim, grapher.hidden_dim, rgcn_hidden_dim, num_classes, rgcn_layers_num)
 
         self.model = AdvancedGrapher(grapher, rgcn, noedge_cl, add_rgcn)
+
         self.criterion = {'ce': nn.CrossEntropyLoss(reduction='none'), 'focal': FocalLoss(focal_loss_gamma)}
         self.tokenizer = tokenizer
         self.cache_dir = cache_dir
@@ -119,10 +120,7 @@ class LitGrapher(pl.LightningModule):
                                                target_nodes,
                                                target_nodes_mask,
                                                target_edges)"""
-        if self.add_rgcn:
-            logits_nodes, logits_edges = self.model(text_input_ids, text_input_attn_mask, target_nodes, target_nodes_mask, target_edges)
-        else:
-            logits_nodes, logits_edges = self.model(text_input_ids, text_input_attn_mask, target_nodes, target_nodes_mask, target_edges)
+        logits_nodes, logits_edges = self.model(text_input_ids, text_input_attn_mask, target_nodes, target_nodes_mask, target_edges)
 
         loss = compute_loss(self.criterion, logits_nodes, logits_edges, target_nodes,
                             target_edges, self.edges_as_classes, self.focal_loss_gamma)

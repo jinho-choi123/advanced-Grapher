@@ -8,7 +8,7 @@ python main.py    --version 1\
                   --devices "0," \
                   --num_data_workers 32 \
                   --lr 1e-4 \
-                  --batch_size 13 \
+                  --batch_size 12 \
                   --num_sanity_val_steps 10 \
                   --fast_dev_run 0 \
                   --overfit_batches 0 \
@@ -19,8 +19,8 @@ python main.py    --version 1\
                   --detect_anomaly True \
                   --data_path webnlg-dataset/release_v3.0/en \
                   --log_every_n_steps 100 \
-                  --val_check_interval 500 \
-                  --checkpoint_step_frequency 500 \
+                  --val_check_interval 1000 \
+                  --checkpoint_step_frequency 1000 \
                   --focal_loss_gamma 3 \
                   --dropout_rate 0.5 \
                   --num_layers 2 \
