@@ -8,7 +8,6 @@ dependencies:
   - _libgcc_mutex=0.1=main
   - _openmp_mutex=5.1=1_gnu
   - absl-py=2.2.0=pyhd8ed1ab_0
-  - beautifulsoup4=4.13.4=pyha770c72_0
   - blas=2.16=mkl
   - brotli-python=1.0.9=py39h5a03fae_7
   - bzip2=1.0.8=h7f98852_4
@@ -139,7 +138,6 @@ dependencies:
   - pyyaml=6.0=py39hb9d737c_4
   - re2=2024.07.02=hdb19cb5_0
   - readline=8.2=h5eee18b_0
-  - regex=2022.4.24=py39hb9d737c_0
   - requests=2.32.3=pyhd8ed1ab_1
   - sacremoses=0.0.53=pyhd8ed1ab_0
   - scikit-learn=1.1.1=py39h4037b75_0
@@ -172,11 +170,13 @@ dependencies:
   - zstandard=0.19.0=py39h5eee18b_0
   - zstd=1.5.0=ha95c52a_0
   - pip:
+      - beautifulsoup4==4.8.0
       - lxml==5.4.0
       - markdown-it-py==3.0.0
       - mdurl==0.1.2
-      - nervaluate==0.2.0
-      - nltk==3.9.1
+      - nervaluate==0.1.7
+      - nltk==3.4.5
       - pygments==2.19.1
+      - regex==2019.6.8
       - rich==14.0.0
 prefix: /root/miniconda3/envs/advanced_grapher_env

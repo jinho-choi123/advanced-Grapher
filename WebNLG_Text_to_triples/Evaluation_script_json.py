@@ -450,7 +450,7 @@ def evaluaterefcand(reference, candidate):
     evaluator = Evaluator([allrefdict], [allcanddict], tags=['SUB', 'PRED', 'OBJ'])
 
     # Returns overall metrics and metrics for each tag
-    results, results_per_tag, _, _ = evaluator.evaluate()
+    results, results_per_tag = evaluator.evaluate()
 
     return results, results_per_tag
 

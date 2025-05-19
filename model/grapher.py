@@ -27,10 +27,8 @@ class Grapher(nn.Module):
         self.node_sep_id = node_sep_id
         self.default_seq_len_edge = default_seq_len_edge
 
-        if self.edges_as_classes:
-            self.edges = EdgesClass(self.hidden_dim, num_classes, dropout_rate, num_layers)
-        else:
-            self.edges = EdgesGen(self.hidden_dim, vocab_size, bos_token_id)
+        # always use edgesclass
+        self.edges = EdgesClass(self.hidden_dim, num_classes, dropout_rate, num_layers)
 
     def split_nodes(self, output_ids, features):
 
@@ -72,11 +70,8 @@ class Grapher(nn.Module):
 
 
         # EDGES
-        if self.edges_as_classes:
-            logits_edges = self.edges(features)
-        else:
-            seq_len_edge = target_edges.size(3)
-            logits_edges = self.edges(features, seq_len_edge)
+        logits_edges = self.edges(features)
+
 
         if output_hidden_states:
             return logits_nodes, logits_edges, features
@@ -109,87 +104,12 @@ class Grapher(nn.Module):
         features = self.split_nodes(seq_nodes, joint_features)
 
         # EDGES
-        if self.edges_as_classes:
-            # num_nodes x num_nodes x batch_size x class_num
-            logits_edges = self.edges(features)
-        else:
-            logits_edges = self.edges(features, seq_len_edge)
+        # num_nodes x num_nodes x batch_size x class_num
+        logits_edges = self.edges(features)
 
         seq_edges = logits_edges.argmax(-1)
 
         return logits_nodes, seq_nodes, logits_edges, seq_edges
-
-
-class EdgesGen(nn.Module):
-    def __init__(self, hidden_dim, vocab_size, bos_token):
-        super(EdgesGen, self).__init__()
-
-        self.vocab_size = vocab_size
-        self.bos_token = bos_token
-        self.edgeDecoder = GRUDecoder(hidden_dim, vocab_size)
-
-    def forward(self, features, seq_len):
-
-        # features: num_nodes X batch_size X hidden_dim
-
-        device = features.device
-
-        num_nodes = features.size(0)
-        batch_size = features.size(1)
-        hidden_dim = features.size(2)
-
-        all_logits = torch.zeros(seq_len, num_nodes * num_nodes * batch_size, self.vocab_size, device=device)
-
-        input = torch.ones(num_nodes * num_nodes * batch_size, dtype=torch.long, device=device) * self.bos_token
-
-        # num_nodes X num_nodes X batch_size X hidden_dim
-        feats = features.unsqueeze(0).expand(num_nodes, -1, -1, -1)
-
-        # num_nodes*num_nodes*batch_size X hidden_dim
-        hidden = (feats.permute(1, 0, 2, 3) - feats).reshape(-1, hidden_dim).contiguous()
-
-        # set first token in output
-        all_logits[0, :, input] = 1.0
-
-        for t in range(1, seq_len):
-            output, hidden = self.edgeDecoder(input, hidden)
-            all_logits[t] = output
-            input = output.max(1)[1]
-
-        # num_nodes X num_nodes X batch_size X seq_len X vocab_size
-        all_logits = all_logits.reshape(seq_len, num_nodes, num_nodes, batch_size, -1).permute(1, 2, 3, 0, 4)
-
-        return all_logits
-
-
-class GRUDecoder(nn.Module):
-
-    def __init__(self, hidden_size, vocab_size):
-        super(GRUDecoder, self).__init__()
-
-        self.gru = nn.GRU(hidden_size, hidden_size, batch_first=True, num_layers=1)
-        self.out = nn.Linear(hidden_size, vocab_size)
-
-        self.embedding = nn.Embedding(vocab_size, hidden_size)
-
-    def forward(self, x, hidden):
-
-        # x: bsize
-        # hidden: bsize X  hidden_dim or 1 X bsize X hidden_dim
-        if len(hidden.size()) == 2:
-            hidden = hidden.unsqueeze(0)  # to imitate num_layers=1
-
-        emb_input = self.embedding(x)
-
-        if len(x.size()) == 1:
-            emb_input = emb_input.unsqueeze(1)  # bsize X 1 X emb_dim
-        # else bsize X sent_len X emb_dim
-
-        output = F.relu(emb_input)
-        output, hidden = self.gru(output, hidden)
-        output = self.out(output.squeeze())  # bsize X vocab_size OR bsize X sent_len X vocab_size
-
-        return output, hidden
 
 
 class EdgesClass(nn.Module):
@@ -210,7 +130,7 @@ class EdgesClass(nn.Module):
             self.layers.add_module(f'dropout{l}', nn.Dropout(dropout_rate))
         self.layers.add_module('last', nn.Linear(dim, num_classes))
 
-    def forward(self, features, output_hidden_states=False):
+    def forward(self, features):
 
         # features: num_nodes X batch_size X hidden_dim
 

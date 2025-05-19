@@ -20,27 +20,22 @@ class AdvancedGrapher(nn.Module):
             print("Training RGCN Model...")
             # when training rgcn
             # turn off the grad engine for grapher
-            for parameter in self.grapher.parameters():
-                parameter.requires_grad = False
+            self.grapher.requires_grad_(False)
         else:
             print("add_rgcn not flagged.")
             print("Freezed RGCN Model...")
             print("Training Grapher Model...")
             # when training grapher
             # turn off the grad engine for rgcn
-            for parameter in self.rgcn.parameters():
-                parameter.requires_grad = False
+            self.rgcn.requires_grad_(False)
 
     def forward(self, text, text_mask, target_nodes, target_nodes_mask, target_edges):
-
         if not self.add_rgcn:
-            return self.grapher(text, text_mask, target_nodes, target_nodes_mask, target_edges, False)
+            return self.grapher(text, text_mask, target_nodes, target_nodes_mask, target_edges)
 
         # logits_edges: num_nodes x num_nodes x batch_size x num_classes
         # features: num_nodes x batch_size x hidden_dim
         logits_nodes, logits_edges, features = self.grapher(text, text_mask, target_nodes, target_nodes_mask, target_edges, True)
-
-
 
         # logits_edges: batch_size x num_nodes x num_nodes x num_classes
         logits_edges = logits_edges.permute(2, 0, 1, 3)
@@ -79,8 +74,6 @@ class AdvancedGrapher(nn.Module):
 
         # batch_size x seq_len x hidden_dim
         joint_features = torch.cat([h[-1] for h in output.decoder_hidden_states], 1)
-
-        seq_len_edge = self.grapher.default_seq_len_edge
 
         # num_nodes x batch_size x hidden_dim
         features = self.grapher.split_nodes(seq_nodes, joint_features)

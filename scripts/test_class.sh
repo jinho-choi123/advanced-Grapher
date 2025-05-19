@@ -10,7 +10,7 @@ python main.py    --version 1\
                   --devices "1," \
                   --num_data_workers 32 \
                   --lr 1e-4 \
-                  --batch_size 50 \
+                  --batch_size 100 \
                   --num_sanity_val_steps 10 \
                   --fast_dev_run 0 \
                   --overfit_batches 0 \
@@ -20,14 +20,12 @@ python main.py    --version 1\
                   --accumulate_grad_batches 5 \
                   --detect_anomaly True \
                   --data_path webnlg-dataset/release_v3.0/en \
-                  --log_every_n_steps 100 \
-                  --val_check_interval 1000 \
-                  --checkpoint_step_frequency 1000 \
+                  --val_check_interval 1.0 \
                   --focal_loss_gamma 3 \
                   --dropout_rate 0.5 \
                   --num_layers 2 \
                   --edges_as_classes 1 \
-                  --checkpoint_model_id 3000 \
+                  --checkpoint_model_id -1 \
                   --precision "bf16" \
                   # --add-rgcn  \
 

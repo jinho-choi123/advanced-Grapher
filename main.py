@@ -25,7 +25,11 @@ def main(args):
     else:
         checkpoint_model_path = os.path.join(args.checkpoint_dir, f"model-step={args.checkpoint_model_id}.ckpt")
 
+    # we are always using edges_as_classes
+    assert args.edges_as_classes
+
     if args.run == 'train':
+        print("TRAIN MODE")
 
         dm = GraphDataModule(tokenizer_class=T5Tokenizer,
                              tokenizer_name=args.pretrained_model,
@@ -48,7 +52,6 @@ def main(args):
             filename='model-{step}',
             save_last=True,
             save_top_k=-1,
-            every_n_train_steps=args.checkpoint_step_frequency,
         )
 
         grapher = LitGrapher(transformer_class=T5ForConditionalGeneration,
@@ -89,6 +92,7 @@ def main(args):
         trainer.fit(model=grapher, datamodule=dm, ckpt_path=checkpoint_model_path)
 
     elif args.run == 'test':
+        print("TEST MODE")
 
         assert os.path.exists(checkpoint_model_path), 'Provided checkpoint does not exists, cannot run the test'
 
@@ -148,18 +152,17 @@ if __name__ == "__main__":
 
     parser.add_argument("--dataset", type=str, default='webnlg')
     parser.add_argument("--run", type=str, default='train')
-    parser.add_argument('--pretrained_model', type=str, default='t5-large')
+    parser.add_argument('--pretrained_model', type=str, default='t5-base')
     parser.add_argument('--version', type=str, default='0')
     parser.add_argument('--data_path', type=str, default='')
     parser.add_argument('--cache_dir', type=str, default='cache')
     parser.add_argument('--num_data_workers', type=int, default=3)
-    parser.add_argument('--checkpoint_step_frequency', type=int, default=-1)
     parser.add_argument('--checkpoint_model_id', type=int, default=-1)
     parser.add_argument('--max_nodes', type=int, default=8)
     parser.add_argument('--max_edges', type=int, default=7)
     parser.add_argument('--default_seq_len_node', type=int, default=20)
     parser.add_argument('--default_seq_len_edge', type=int, default=20)
-    parser.add_argument('--edges_as_classes', type=int, default=0)
+    parser.add_argument('--edges_as_classes', type=int, default=1)
     parser.add_argument('--batch_size', type=int, default=10)
     parser.add_argument('--lr', default=1e-5, type=float)
     parser.add_argument("--focal_loss_gamma", type=float, default=0.0)
