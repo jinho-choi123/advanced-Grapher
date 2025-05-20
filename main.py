@@ -26,10 +26,17 @@ class SeparateCheckpoint(ModelCheckpoint):
 
         import torch
 
-        # save the grapher model : if it not exists
-        if not os.path.exists(self.grapher_ckpt_path):
-            torch.save({'state_dict': grapher_state_dict}, self.grapher_ckpt_path)
-            print(f"Saved Grapher checkpoint to {self.grapher_ckpt_path}")
+        # # save the grapher model : if it not exists
+        # if not os.path.exists(self.grapher_ckpt_path):
+        #     torch.save({'state_dict': grapher_state_dict}, self.grapher_ckpt_path)
+        #     print(f"Saved Grapher checkpoint to {self.grapher_ckpt_path}")
+        # else:
+        #     print(f"Checkpoint already exists at {self.grapher_ckpt_path}, not saving again.")
+
+        # save the grapher model : every time
+        torch.save({'state_dict': grapher_state_dict}, self.grapher_ckpt_path)
+        print(f"Saved Grapher checkpoint to {self.grapher_ckpt_path}")
+
         # save the rgcn model : every time
         torch.save({'state_dict': rgcn_state_dict}, self.rgcn_ckpt_path)
         print(f"Saved RGCN checkpoint to {self.rgcn_ckpt_path}")
@@ -56,6 +63,11 @@ def main(args):
         rgcn_ckpt_path = os.path.join(args.checkpoint_dir, 'rgcn_last.ckpt')
     else:
         rgcn_ckpt_path = os.path.join(args.checkpoint_dir, f"rgcn_epoch={args.checkpoint_rgcn_model_id}.ckpt")
+
+    if args.freeze_pregrapher:
+        print("Freezing Pre-Grapher model...")
+        grapher_ckpt_path += grapher_ckpt_path.replace('.ckpt', '_f.ckpt')
+        rgcn_ckpt_path += rgcn_ckpt_path.replace('.ckpt', '_f.ckpt')
 
     # we are always using edges_as_classes
     assert args.edges_as_classes
