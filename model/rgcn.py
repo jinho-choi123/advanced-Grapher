@@ -20,6 +20,7 @@ class RGCNLayer(nn.Module):
 
     def forward(self, node_features, adj_list, rel_type):
         # convert node_features from num_nodes x batch_size x hidden
+
         # to batch_size x num_nodes x hidden
         node_features = node_features.permute(1, 0, 2)
 
@@ -28,11 +29,11 @@ class RGCNLayer(nn.Module):
         for r in range(self.num_rels):
             mask = (rel_type == r).float()
             weight_r = self.weight[r]
-
             neighbor_count = torch.clamp(torch.sum(adj_list, dim=-1, keepdim=True), min=1)
+            weighted_sum = torch.matmul(node_features, weight_r)
+            masked_adj_list = adj_list * mask
 
-            weighted_sum = torch.matmul(adj_list * mask, torch.matmul(node_features, weight_r))
-
+            weighted_sum = torch.matmul(masked_adj_list, weighted_sum)
             output += weighted_sum / neighbor_count
 
         output += torch.matmul(node_features, self.self_loop)
@@ -54,6 +55,8 @@ class RelationalGCN(nn.Module):
         self.hidden_dim = hidden_dim
         self.encoding_layer = nn.Parameter(torch.Tensor(input_dim, hidden_dim))
         self.decoding_layer = nn.Parameter(torch.Tensor(hidden_dim, output_dim))
+        nn.init.xavier_uniform_(self.encoding_layer)
+        nn.init.xavier_uniform_(self.decoding_layer)
 
         self.rgcn_layers = nn.ModuleList([
             RGCNLayer(hidden_dim, hidden_dim, num_rels) for _ in range(rgcn_layers_num)

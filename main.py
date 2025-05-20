@@ -152,7 +152,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--dataset", type=str, default='webnlg')
     parser.add_argument("--run", type=str, default='train')
-    parser.add_argument('--pretrained_model', type=str, default='t5-base')
+    parser.add_argument('--pretrained_model', type=str, default='t5-small')
     parser.add_argument('--version', type=str, default='0')
     parser.add_argument('--data_path', type=str, default='')
     parser.add_argument('--cache_dir', type=str, default='cache')

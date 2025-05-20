@@ -60,6 +60,7 @@ class Grapher(nn.Module):
         logits_nodes = output.logits  # batch_size x seq_len x vocab_size
         joint_features = output.decoder_hidden_states[-1]  # batch_size x seq_len x hidden_dim
 
+
         gen_seq = logits_nodes.argmax(-1)
 
         # num_nodes x batch_size x hidden_dim
