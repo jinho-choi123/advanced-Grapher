@@ -16,14 +16,16 @@ class AdvancedGrapher(nn.Module):
 
         if add_rgcn:
             print("add_rgcn flagged.")
-            # self.rgcn.requires_grad_(True)
+            print("Freezed Grapher Model...")
+            print("Training RGCN Model...")
+            self.grapher.requires_grad_(False)
         else:
             print("add_rgcn not flagged.")
             print("Freezed RGCN Model...")
             print("Training Grapher Model...")
             # when training grapher
             # turn off the grad engine for rgcn
-#             self.rgcn.requires_grad_(False)
+            self.rgcn.requires_grad_(False)
 
     def forward(self, text, text_mask, target_nodes, target_nodes_mask, target_edges):
         if not self.add_rgcn:

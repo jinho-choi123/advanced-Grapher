@@ -49,7 +49,7 @@ def main(args):
 
         checkpoint_callback = ModelCheckpoint(
             dirpath=args.checkpoint_dir,
-            filename='model-{step}',
+            filename='model-{epoch}',
             save_last=True,
             save_top_k=-1,
         )
