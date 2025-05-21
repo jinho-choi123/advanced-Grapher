@@ -8,6 +8,20 @@ import os
 from pytorch_lightning.callbacks import ModelCheckpoint, RichProgressBar
 from misc.utils import decode_graph
 import pprint
+from pytorch_lightning.callbacks import Callback
+from huggingface_hub import HfApi, login
+
+# login to huggingface
+login()
+
+api = HfApi()
+
+class HuggingfaceUploadCallback(Callback):
+    def on_train_end(self, trainer: "pl.Trainer", pl_module: "pl.LightningModule") -> None:
+        api.upload_large_folder(repo_id="ball1433/advanced-grapher", repo_type="model", folder_path="output/webnlg_version_1", allow_patterns="output/webnlg_version_1/*")
+
+        return super().on_train_end(trainer, pl_module)
+
 
 def main(args):
 
@@ -23,7 +37,7 @@ def main(args):
     if args.checkpoint_model_id < 0:
         checkpoint_model_path = os.path.join(args.checkpoint_dir, 'last.ckpt')
     else:
-        checkpoint_model_path = os.path.join(args.checkpoint_dir, f"model-step={args.checkpoint_model_id}.ckpt")
+        checkpoint_model_path = os.path.join(args.checkpoint_dir, f"model-epoch={args.checkpoint_model_id}.ckpt")
 
     # we are always using edges_as_classes
     assert args.edges_as_classes
@@ -85,7 +99,7 @@ def main(args):
 
         trainer = pl.Trainer.from_argparse_args(args,
                                                 logger=TB,
-                                                callbacks=[checkpoint_callback, RichProgressBar(10)])
+                                                callbacks=[checkpoint_callback, RichProgressBar(10), HuggingfaceUploadCallback()])
 
         dm.setup(stage='validate')
 
