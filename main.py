@@ -12,7 +12,7 @@ from pytorch_lightning.callbacks import Callback
 from huggingface_hub import HfApi, login
 
 # login to huggingface
-login()
+#login()
 
 api = HfApi()
 
