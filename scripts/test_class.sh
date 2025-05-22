@@ -4,7 +4,7 @@
 python main.py    --version 1\
                   --default_root_dir output \
                   --run test \
-                  --max_epochs 50 \
+                  --max_epochs 100 \
                   --accelerator gpu \
                   --num_nodes 1 \
                   --devices "0," \
@@ -17,7 +17,7 @@ python main.py    --version 1\
                   --limit_train_batches 1.0 \
                   --limit_val_batches 1.0 \
                   --limit_test_batches 1.0 \
-                  --accumulate_grad_batches 5 \
+                  --accumulate_grad_batches 1 \
                   --detect_anomaly True \
                   --data_path webnlg-dataset/release_v3.0/en \
                   --val_check_interval 1.0 \
@@ -25,9 +25,10 @@ python main.py    --version 1\
                   --dropout_rate 0.5 \
                   --num_layers 2 \
                   --edges_as_classes 1 \
-                  --checkpoint_model_id 138 \
-                  --precision "bf16" \
-                  --add-rgcn  \
+                  --checkpoint_model_id -1 \
+                  --check_val_every_n_epoch 10 \
+                  #--precision "bf16" \
+                  #--add-rgcn  \
 
 
                   # set add_rgcn flag if you want to test with rgcn added
