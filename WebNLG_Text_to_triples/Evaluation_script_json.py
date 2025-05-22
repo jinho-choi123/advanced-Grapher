@@ -19,6 +19,8 @@ import json
 
 import time
 
+nltk.download('punkt')
+
 currentpath = os.getcwd()
 
 def getRefs(filepath):
