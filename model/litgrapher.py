@@ -77,9 +77,10 @@ class LitGrapher(pl.LightningModule):
                             num_layers=num_layers,
                             vocab_size=vocab_size,
                             bos_token_id=bos_token_id)
-        rgcn = RelationalGCN(grapher.hidden_dim, grapher.hidden_dim, rgcn_hidden_dim, num_classes, rgcn_layers_num)
+        # rgcn = RelationalGCN(grapher.hidden_dim, grapher.hidden_dim, rgcn_hidden_dim, num_classes, rgcn_layers_num)
 
-        model = AdvancedGrapher(grapher, rgcn, noedge_cl, add_rgcn)
+        # model = AdvancedGrapher(grapher, rgcn, noedge_cl, add_rgcn)
+        model = grapher
 
         self.model = model
 
