@@ -12,7 +12,7 @@ from pytorch_lightning.callbacks import Callback
 from huggingface_hub import HfApi, login
 
 # login to huggingface
-login()
+# login()
 
 api = HfApi()
 
@@ -99,7 +99,7 @@ def main(args):
 
         trainer = pl.Trainer.from_argparse_args(args,
                                                 logger=TB,
-                                                callbacks=[checkpoint_callback, RichProgressBar(10), HuggingfaceUploadCallback()])
+                                                callbacks=[checkpoint_callback, RichProgressBar(10)])
 
         dm.setup(stage='validate')
 
