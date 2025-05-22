@@ -122,7 +122,7 @@ class EdgesClass(nn.Module):
         self.layers = nn.Sequential()
 
         dim = num_classes
-        self.layers.add_module('first', nn.Linear(hidden_dim, dim))
+        self.layers.add_module('first', nn.Linear(2 * hidden_dim, dim))
         self.layers.add_module('firstrelu', nn.ReLU())
         self.layers.add_module('firstdropout', nn.Dropout(dropout_rate))
         for l in range(num_layers):
@@ -139,10 +139,12 @@ class EdgesClass(nn.Module):
         batch_size = features.size(1)
 
         # num_nodes_valid X num_nodes_valid X batch_size X hidden_dim
-        feats = features.unsqueeze(0).expand(num_nodes, -1, -1, -1)
+        feats1 = features.unsqueeze(0).expand(num_nodes, -1, -1, -1)
+        feats2 = features.unsqueeze(1).expand(-1, num_nodes, -1, -1)
+        feats = torch.cat((feats1, feats2), -1)
 
-        # [featurs[i] - features[j]]: (num_nodes_valid*num_nodes_valid*batch_size) X hidden_dim
-        hidden = (feats.permute(1, 0, 2, 3) - feats).reshape(-1, self.hidden_dim)
+        # [featurs[i] - features[j]]: (num_nodes_valid*num_nodes_valid*batch_size) X (2 * hidden_dim)
+        hidden = feats.reshape(-1, 2 * self.hidden_dim)
 
         # logits: num_nodes_valid*num_nodes_valid*batch_size X num_classes
         logits = self.layers(hidden)
