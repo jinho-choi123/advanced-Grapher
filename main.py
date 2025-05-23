@@ -153,10 +153,10 @@ if __name__ == "__main__":
     parser.add_argument("--dataset", type=str, default='webnlg')
     parser.add_argument("--run", type=str, default='train')
     parser.add_argument('--pretrained_model', type=str, default='t5-small')
-    parser.add_argument('--version', type=str, default='0')
+    parser.add_argument('--version', type=str, default='1')
     parser.add_argument('--data_path', type=str, default='')
     parser.add_argument('--cache_dir', type=str, default='cache')
-    parser.add_argument('--num_data_workers', type=int, default=3)
+    parser.add_argument('--num_data_workers', type=int, default=2)
     parser.add_argument('--checkpoint_model_id', type=int, default=-1)
     parser.add_argument('--max_nodes', type=int, default=8)
     parser.add_argument('--max_edges', type=int, default=7)
@@ -164,10 +164,10 @@ if __name__ == "__main__":
     parser.add_argument('--default_seq_len_edge', type=int, default=20)
     parser.add_argument('--edges_as_classes', type=int, default=1)
     parser.add_argument('--batch_size', type=int, default=10)
-    parser.add_argument('--lr', default=1e-5, type=float)
-    parser.add_argument("--focal_loss_gamma", type=float, default=0.0)
+    parser.add_argument('--lr', default=1e-4, type=float)
+    parser.add_argument("--focal_loss_gamma", type=float, default=3.0)
     parser.add_argument("--dropout_rate", type=float, default=0.5)
-    parser.add_argument("--num_layers", type=int, default=1)
+    parser.add_argument("--num_layers", type=int, default=2)
     parser.add_argument("--eval_dump_only", type=int, default=0)
     parser.add_argument("--inference_input_text", type=str,
                         default='Danielle Harris had a main role in Super Capers, a 98 minute long movie.')
@@ -175,7 +175,7 @@ if __name__ == "__main__":
                         default=512)
     parser.add_argument("--rgcn_layers_num", type=int,
                         default=2)
-    parser.add_argument("--rgcn_hidden_dim", type=int, default=128)
+    parser.add_argument("--rgcn_hidden_dim", type=int, default=256)
     parser.add_argument("--add-rgcn", action='store_true')
 
 
