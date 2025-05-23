@@ -156,7 +156,7 @@ if __name__ == "__main__":
     parser.add_argument('--version', type=str, default='1')
     parser.add_argument('--data_path', type=str, default='')
     parser.add_argument('--cache_dir', type=str, default='cache')
-    parser.add_argument('--num_data_workers', type=int, default=2)
+    parser.add_argument('--num_data_workers', type=int, default=32)
     parser.add_argument('--checkpoint_model_id', type=int, default=-1)
     parser.add_argument('--max_nodes', type=int, default=8)
     parser.add_argument('--max_edges', type=int, default=7)
