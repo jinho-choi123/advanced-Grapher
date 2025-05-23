@@ -9,22 +9,8 @@ from pytorch_lightning.callbacks import ModelCheckpoint, RichProgressBar
 from misc.utils import decode_graph
 import pprint
 from pytorch_lightning.callbacks import Callback
-from huggingface_hub import HfApi, login
-
-# login to huggingface
-# login()
-
-api = HfApi()
-
-class HuggingfaceUploadCallback(Callback):
-    def on_train_end(self, trainer: "pl.Trainer", pl_module: "pl.LightningModule") -> None:
-        api.upload_large_folder(repo_id="ball1433/advanced-grapher", repo_type="model", folder_path="output/webnlg_version_1", allow_patterns="output/webnlg_version_1/*")
-
-        return super().on_train_end(trainer, pl_module)
-
 
 def main(args):
-
     args.eval_dir = os.path.join(args.default_root_dir, args.dataset + '_version_' + args.version)
     args.checkpoint_dir = os.path.join(args.eval_dir, 'checkpoints')
 
