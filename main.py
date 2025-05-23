@@ -9,6 +9,9 @@ from pytorch_lightning.callbacks import ModelCheckpoint, RichProgressBar
 from misc.utils import decode_graph
 import pprint
 from pytorch_lightning.callbacks import Callback
+import torch
+
+torch.manual_seed(42)
 
 def main(args):
     args.eval_dir = os.path.join(args.default_root_dir, args.dataset + '_version_' + args.version)

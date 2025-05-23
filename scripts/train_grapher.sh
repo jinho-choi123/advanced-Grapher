@@ -2,7 +2,7 @@
 python main.py    --version 1\
                   --default_root_dir output \
                   --run train \
-                  --max_epochs 100 \
+                  --max_epochs 50 \
                   --accelerator gpu \
                   --num_nodes 1 \
                   --devices "1," \

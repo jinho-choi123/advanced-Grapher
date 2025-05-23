@@ -1,16 +1,21 @@
-<div align="center">    
- 
-# Knowledge Graph Generation From Text
+<div align="center">
+
+# two-trial Text Knowledge Graph Generation(TeKGG)
+
+## Description
+2-trial Text Knowledge Graph Generation(TeKGG) suggest a novel method of generating Knowledge Graph from text.
+1. Generate first-trial Knowledge Graph using [Grapher](https://github.com/IBM/Grapher). Extract the Knowledge Graph and node embeddings.
+2. Using the extracted node embeddings and first-trial Knowledge Graph, we apply GCN message passing to aggregate node embeddings from neighbors.
 
 [![Paper](https://img.shields.io/badge/Paper-ArXiv.2211.10511-blue)](https://arxiv.org/abs/2211.10511)
 [![Conference](https://img.shields.io/badge/EMNLP-2022-orange)](https://2022.emnlp.org/)
- 
-<!--  
-Conference   
--->   
+
+<!--
+Conference
+-->
 </div>
 
-## Description   
+## Description
 Grapher is an end-to-end multi-stage Knowledge Graph (KG) construction system, that separates the overall generation process  into  two  stages.
 <p align="center">
   <img src="imgs/overview_grapher.png" width="50%">
@@ -26,9 +31,9 @@ Edge construction, using generation (e.g.,GRU) or a classifier head. Blue circle
 
 ## Environment
 To run this code, please install PyTorch and Pytorch Lightning (we tested the code on Pytorch 1.13 and Pytorch Lightning 1.8.1)
-  
 
-## Setup   
+
+## Setup
 Setup Environment using Conda
 ```bash
 # setup conda environment
@@ -39,9 +44,9 @@ conda activate advanced_grapher_env
 
 ```
 
-Install dependencies   
+Install dependencies
 ```bash
-# clone project   
+# clone project
 git clone git@github.com:jinho-choi123/advanced-Grapher.git
 
 # navigate to the directory
@@ -52,12 +57,12 @@ git clone https://gitlab.com/webnlg/corpus-reader.git corpusreader
 
 # clone another external repositories for scoring the results
 git clone https://github.com/WebNLG/WebNLG-Text-to-triples.git WebNLG_Text_to_triples
- ```   
+ ```
 ## Data
 
-WebNLG 3.0 dataset   
+WebNLG 3.0 dataset
  ```bash
-# download the dataset   
+# download the dataset
 git clone https://gitlab.com/shimorina/webnlg-dataset.git
 ```
 
@@ -92,7 +97,7 @@ Results can be visualized in Tensorboard
 tensorboard --logdir output
 ```
 
-### Citation   
+### Citation
 ```
 @inproceedings{grapher2022,
   title={Knowledge Graph Generation From Text},
@@ -100,4 +105,4 @@ tensorboard --logdir output
   booktitle={Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing (Findings of EMNLP)},
   year={2022}
 }
-```   
+```

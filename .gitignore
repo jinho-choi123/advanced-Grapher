@@ -1,4 +1,5 @@
 cache/
+output/
 # corpusreader/
 # webnlg-dataset/
 # WebNLG_Text_to_triples/
