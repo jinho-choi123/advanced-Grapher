@@ -5,7 +5,7 @@ python main.py    --version 1\
                   --max_epochs 100 \
                   --accelerator gpu \
                   --num_nodes 1 \
-                  --devices "0," \
+                  --devices "1," \
                   --batch_size 120 \
                   --num_sanity_val_steps 10 \
                   --fast_dev_run 0 \

@@ -8,7 +8,7 @@ class RGCNLayer(nn.Module):
         self.in_feat = in_feat
         self.out_feat = out_feat
         self.num_rels = num_rels
-        self.activation = nn.Relu()
+        self.activation = nn.ReLU()
 
         # Relation-specific weight matrices
         self.weight = nn.Parameter(torch.Tensor(num_rels, in_feat, out_feat))
@@ -16,18 +16,12 @@ class RGCNLayer(nn.Module):
 
         # Self-loop weight
         self.self_loop = nn.Parameter(torch.Tensor(in_feat, out_feat))
-
-        # drop edges
-        self.edges_dropout = nn.Dropout(dropout)
         nn.init.xavier_uniform_(self.self_loop, gain=nn.init.calculate_gain('relu'))
 
     def forward(self, node_features, adj_list, rel_type, training=True, drop_prob=0.2):
         # node_features: [N, B, D] → [B, N, D]
         node_features = node_features.permute(1, 0, 2)
         output = torch.zeros_like(node_features)
-
-        # DropEdge
-        adj_list = self.edges_dropout(adj_list)
 
         for r in range(self.num_rels):
             mask = (rel_type == r).float()  # [B, N, N]

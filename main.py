@@ -182,7 +182,7 @@ if __name__ == "__main__":
     parser = pl.Trainer.add_argparse_args(parser)
 
     args = parser.parse_args()
-    pprint.pp(f"arguments: \n{args}")
+    # pprint.pp(f"arguments: \n{args}")
 
 
     main(args)
