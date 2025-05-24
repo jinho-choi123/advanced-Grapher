@@ -1,6 +1,7 @@
 <div align="center">
 
-# two-trial Text Knowledge Graph Generation(TeKGG)
+# Two-trial tExt Knowledge Graph Generation(TEKGG)
+![TEKGG Poster](imgs/TEKGG_Poster.png)
 
 ## Description
 2-trial Text Knowledge Graph Generation(TeKGG) suggest a novel method of generating Knowledge Graph from text.
