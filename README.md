@@ -2,7 +2,7 @@
 
 # Two-trial tExt Knowledge Graph Generation(TEKGG)
 ## Description
-2-trial Text Knowledge Graph Generation(TeKGG) suggest a novel method of generating Knowledge Graph from text.
+Two-trial tExt Knowledge Graph Generation(TEKGG) suggest a novel method of generating Knowledge Graph from text.
 1. Generate first-trial Knowledge Graph using [Grapher](https://github.com/IBM/Grapher). Extract the Knowledge Graph and node embeddings.
 2. Using the extracted node embeddings and first-trial Knowledge Graph, we apply GCN message passing to aggregate node embeddings from neighbors.
 3. Using newly generated node embeddings, it is again passed to Grapher, and generate second-trial Knowledge Graph.
