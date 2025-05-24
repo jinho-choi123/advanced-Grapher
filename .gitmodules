@@ -1,3 +1,7 @@
 [submodule "WebNLG_Text_to_triples"]
 	path = WebNLG_Text_to_triples
 	url = https://github.com/WebNLG/WebNLG-Text-to-triples.git
+
+[submodule "webnlg-dataset"]
+		path = webnlg-dataset
+		url = https://gitlab.com/shimorina/webnlg-dataset
