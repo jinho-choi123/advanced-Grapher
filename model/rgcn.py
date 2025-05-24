@@ -21,6 +21,7 @@ class RGCNLayer(nn.Module):
     def forward(self, node_features, adj_list, rel_type, training=True, drop_prob=0.2):
         # node_features: [N, B, D] → [B, N, D]
         node_features = node_features.permute(1, 0, 2)
+
         output = torch.zeros_like(node_features)
 
         for r in range(self.num_rels):
@@ -63,6 +64,11 @@ class RelationalGCN(nn.Module):
         # node_features: [N, B, D]
         encoded_node_features = torch.matmul(node_features, self.encoding_layer)  # [N, B, H]
 
+        start_encoded_node_features = encoded_node_features
+
+        print(f"before rgcn: start_encoded_node_features[0][0]: {start_encoded_node_features[2][0]}")
+
+
         for rgcn in self.rgcn_layers:
             prev_features = encoded_node_features
             encoded_node_features = rgcn(
@@ -73,6 +79,12 @@ class RelationalGCN(nn.Module):
                 drop_prob=drop_prob
             )
             encoded_node_features = encoded_node_features + prev_features  # residual
+
+        final_encoded_node_features = encoded_node_features
+        print(f"after rgcn: final_encoded_node_features[0][0]: {final_encoded_node_features[2][0]}")
+
+        print(f"change after rgcn model: {final_encoded_node_features[2][0] - start_encoded_node_features[2][0]}")
+
 
         node_features = torch.matmul(encoded_node_features, self.decoding_layer)
         return node_features  # [N, B, D]
