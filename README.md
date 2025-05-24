@@ -8,7 +8,7 @@ Two-trial tExt Knowledge Graph Generation(TEKGG) suggest a novel method of gener
 3. Using newly generated node embeddings, it is again passed to Grapher, and generate second-trial Knowledge Graph.
 
 ## Poster Session
-![TEKGG Poster](imgs/TEKGG_Poster.png)
+![TEKGG Poster]([imgs/TEKGG_Poster.png](https://github.com/jinho-choi123/advanced-Grapher/blob/artifact-evaluation/imgs/TEKGG_Poster.png))
 
 
 </div>
