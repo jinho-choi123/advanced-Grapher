@@ -64,9 +64,6 @@ class RelationalGCN(nn.Module):
         # node_features: [N, B, D]
         encoded_node_features = torch.matmul(node_features, self.encoding_layer)  # [N, B, H]
 
-        start_encoded_node_features = encoded_node_features
-
-        print(f"before rgcn: start_encoded_node_features[0][0]: {start_encoded_node_features[2][0]}")
 
 
         for rgcn in self.rgcn_layers:
@@ -79,11 +76,6 @@ class RelationalGCN(nn.Module):
                 drop_prob=drop_prob
             )
             encoded_node_features = encoded_node_features + prev_features  # residual
-
-        final_encoded_node_features = encoded_node_features
-        print(f"after rgcn: final_encoded_node_features[0][0]: {final_encoded_node_features[2][0]}")
-
-        print(f"change after rgcn model: {final_encoded_node_features[2][0] - start_encoded_node_features[2][0]}")
 
 
         node_features = torch.matmul(encoded_node_features, self.decoding_layer)
