@@ -7,7 +7,7 @@
 2. Using the extracted node embeddings and first-trial Knowledge Graph, we apply GCN message passing to aggregate node embeddings from neighbors.
 3. Using newly generated node embeddings, it is again passed to Grapher, and generate second-trial Knowledge Graph.
 
-
+## Poster Session
 ![TEKGG Poster](imgs/TEKGG_Poster.png)
 
 
