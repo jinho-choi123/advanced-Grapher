@@ -1,6 +1,9 @@
 tmp-cache/
 tmp-webnlg-dataset/
 tmp_output/
+cache/
+webnlg-dataset/
+output/
 # corpusreader/
 # webnlg-dataset/
 # WebNLG_Text_to_triples/
