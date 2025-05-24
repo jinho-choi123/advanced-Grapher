@@ -23,7 +23,6 @@ This script will setup all the conda environments, datasets, and other 3rd-party
 sh scripts/setup.sh
 ```
 
-## Dataset
 We use WebNLG 3.0 dataset from [here](https://gitlab.com/shimorina/webnlg-dataset.git)
 
 ## How to train
