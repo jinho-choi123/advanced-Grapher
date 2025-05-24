@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # install conda dependencies
-conda env create -f requirements.yml -n advanced_grapher_env
+conda env create -q -f requirements.yml -n advanced_grapher_env
 conda activate advanced_grapher_env
 
 git clone https://gitlab.com/webnlg/corpus-reader.git corpusreader
