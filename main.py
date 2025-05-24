@@ -112,7 +112,6 @@ def main(args):
                              max_edges=grapher.max_edges,
                              edges_as_classes=grapher.edges_as_classes,
                              model_max_length=args.model_max_length)
-
         dm.setup(stage='test')
 
         trainer = pl.Trainer.from_argparse_args(args, logger=TB)

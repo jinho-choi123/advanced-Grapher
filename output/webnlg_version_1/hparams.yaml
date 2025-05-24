@@ -1,0 +1,1209 @@
+add_rgcn: false
+bos_token_id: 0
+cache_dir: cache
+default_seq_len_edge: 20
+dropout_rate: 0.5
+edge_classes:
+- anthem
+- commander
+- creator
+- discovered
+- website
+- shipBeam
+- musicSubgenre
+- operatingOrganisation
+- ingredient
+- mascot
+- hasDeputy
+- editor
+- campus
+- site
+- related
+- modelStartYear
+- regionServed
+- areaUrban
+- designer
+- birthPlace
+- instrument
+- lastAired
+- escapeVelocity
+- icaoLocationIdentifier
+- ethnicGroup
+- shipOrdered
+- higher
+- rocketStages
+- architect
+- backupPilot
+- region
+- river
+- profession
+- hasToItsNortheast
+- mediaType
+- industry
+- sportGoverningBody
+- percentageOfAreaWater
+- trainerAircraft
+- totalLaunches
+- influencedBy
+- predecessor
+- numberOfRooms
+- legislature
+- 4thRunwayLengthFeet
+- mainIngredient
+- broadcastedBy
+- genus
+- governingBody
+- nearestCity
+- deathCause
+- officialLanguage
+- postalCode
+- city
+- completionDate
+- college
+- address
+- nativeName
+- religion
+- cylinderCount
+- party
+- doctoralStudent
+- category
+- 1stRunwaySurfaceType
+- origin
+- function
+- administrativeArrondissement
+- buildDate
+- position
+- language
+- literaryGenre
+- runwaySurfaceType
+- family
+- iataLocationIdentifier
+- militaryRank
+- 1stRunwayLengthMetre
+- rotationPeriod
+- LCCN_number
+- currentclub
+- deathYear
+- successor
+- isPartOfMilitaryConflict
+- activeYearsStartDate
+- bird
+- orbitalPeriod
+- occupation
+- leader
+- stateOfOrigin
+- populationTotal
+- bedCount
+- eissnNumber
+- hasToItsSouthwest
+- fate
+- director
+- elevationAboveTheSeaLevelInFeet
+- numberOfPages
+- firstAired
+- 1stRunwayLengthFeet
+- frequency
+- developer
+- competeIn
+- architecturalStyle
+- areaTotal
+- service
+- distributingCompany
+- nationality
+- selectedByNasa
+- surfaceArea
+- operatingIncome
+- shipLaidDown
+- academicStaffSize
+- generalManager
+- chief
+- christeningDate
+- absoluteMagnitude
+- powerType
+- product
+- relatedMeanOfTransportation
+- currentteam
+- author
+- comparable
+- birthDate
+- numberOfMembers
+- series
+- inOfficeWhileMonarch
+- draftTeam
+- buildingStartDate
+- areaOfLand
+- builder
+- elevationAboveTheSeaLevelInMetres
+- genre
+- awards
+- layout
+- 5thRunwaySurfaceType
+- almaMater
+- foundationPlace
+- numberOfPostgraduateStudents
+- discoverer
+- abbreviation
+- numberOfLocations
+- numberOfUndergraduateStudents
+- timeInSpace
+- hasToItsSoutheast
+- district
+- champions
+- president
+- bandMember
+- operator
+- areaOfWater
+- shipPower
+- hasToItsNorthwest
+- garrison
+- established
+- activeYearsStartYear
+- cityServed
+- 3rdRunwayLengthFeet
+- crewMembers
+- designCompany
+- owningOrganisation
+- dateOfRetirement
+- served
+- temperature
+- outlookRanking
+- leaderTitle
+- leaderParty
+- jurisdiction
+- ground
+- bodyStyle
+- formerTeam
+- rector
+- transmission
+- mayor
+- draftYear
+- cost
+- dishVariation
+- chairmanTitle
+- inOfficeWhilePresident
+- NationalRegisterOfHistoricPlacesReferenceNumber
+- unit
+- fossil
+- firstAppearanceInFilm
+- patronSaint
+- significantProject
+- governmentType
+- utcOffset
+- shipLaunch
+- yearOfConstruction
+- residence
+- width
+- aircraftFighter
+- numberOfStudents
+- inOfficeWhileGovernor
+- birthYear
+- serviceStartYear
+- headquarter
+- spokenIn
+- foundingDate
+- longName
+- deathDate
+- derivative
+- starring
+- length
+- netIncome
+- state
+- epoch
+- alternativeName
+- country
+- countySeat
+- mass
+- runwayLength
+- firstPublicationYear
+- density
+- hubAirport
+- failedLaunches
+- child
+- addedToTheNationalRegisterOfHistoricPlaces
+- issnNumber
+- office
+- season
+- chairperson
+- voice
+- libraryofCongressClassification
+- league
+- representative
+- hasToItsNorth
+- inOfficeWhileVicePresident
+- fullName
+- deathPlace
+- isbnNumber
+- 5thRunwayNumber
+- professionalField
+- 4thRunwaySurfaceType
+- dedicatedTo
+- mostChampions
+- shipDraft
+- partsType
+- club
+- nickname
+- averageSpeed
+- maidenVoyage
+- transportAircraft
+- capital
+- codenCode
+- associatedBand/associatedMusicalArtist
+- topSpeed
+- currentTenants
+- isPartOf
+- draftPick
+- largestCity
+- year
+- shipInService
+- award
+- wheelbase
+- location
+- debutTeam
+- militaryBranch
+- inaugurationDate
+- activeYearsEndDate
+- similarDish
+- totalProduction
+- partialFailures
+- manager
+- universityTeam
+- aircraftHelicopter
+- colour
+- ribbonAward
+- numberOfEmployees
+- countryOrigin
+- servingTemperature
+- mission
+- musicFusionGenre
+- foundedBy
+- locationIdentifier
+- attackAircraft
+- oclcNumber
+- 1stRunwayNumber
+- launchSite
+- part
+- class
+- title
+- elevationAboveTheSeaLevel
+- modelYears
+- runwayName
+- owner
+- 2ndRunwaySurfaceType
+- division
+- fat
+- manufacturer
+- followedBy
+- revenue
+- protein
+- creatorOfDish
+- keyPerson
+- activeYearsEndYear
+- maidenFlight
+- periapsis
+- academicDiscipline
+- draftRound
+- shipDisplacement
+- finalFlight
+- timeZone
+- stadium
+- doctoralAdvisor
+- spouse
+- publisher
+- apoapsis
+- minimumTemperature
+- battle
+- order
+- saint
+- floorArea
+- recordLabel
+- chairman
+- background
+- officialSchoolColour
+- playerNumber
+- meanTemperature
+- maximumTemperature
+- parentCompany
+- youthclub
+- course
+- areaCode
+- precededBy
+- associatedRocket
+- shipClass
+- currency
+- subsidiary
+- inOfficeWhilePrimeMinister
+- productionStartYear
+- demonym
+- coach
+- tenant
+- servingSize
+- affiliation
+- impactFactor
+- productionEndYear
+- status
+- wasGivenTheTechnicalCampusStatusBy
+- chancellor
+- municipality
+- motto
+- sportsOffered
+- architecture
+- diameter
+- dean
+- type
+- 3rdRunwaySurfaceType
+- senators
+- engine
+- height
+- stylisticOrigin
+- assembly
+- populationDensity
+- material
+- buildingType
+- formerName
+- significantBuilding
+- employer
+- carbohydrate
+- numberOfVotesAttained
+- birthName
+- latinName
+- place
+- servedAsChiefOfTheAstronautOfficeIn
+- floorCount
+- weight
+- distributor
+- neighboringMunicipality
+- founder
+- notableWork
+- hasToItsWest
+- gemstone
+- __no_edge__
+edges_as_classes: 1
+eos_token_id: 1
+eval_dir: output/webnlg_version_1
+focal_loss_gamma: 3.0
+lr: 0.0001
+max_edges: 7
+max_nodes: 8
+node_sep_id: 32102
+noedge_cl: 372
+noedge_id: 32101
+nonode_id: 32100
+num_classes: 373
+num_layers: 2
+rgcn_hidden_dim: 256
+rgcn_layers_num: 2
+tokenizer: !!python/object:transformers.models.t5.tokenization_t5.T5Tokenizer
+  _additional_special_tokens:
+  - <extra_id_0>
+  - <extra_id_1>
+  - <extra_id_2>
+  - <extra_id_3>
+  - <extra_id_4>
+  - <extra_id_5>
+  - <extra_id_6>
+  - <extra_id_7>
+  - <extra_id_8>
+  - <extra_id_9>
+  - <extra_id_10>
+  - <extra_id_11>
+  - <extra_id_12>
+  - <extra_id_13>
+  - <extra_id_14>
+  - <extra_id_15>
+  - <extra_id_16>
+  - <extra_id_17>
+  - <extra_id_18>
+  - <extra_id_19>
+  - <extra_id_20>
+  - <extra_id_21>
+  - <extra_id_22>
+  - <extra_id_23>
+  - <extra_id_24>
+  - <extra_id_25>
+  - <extra_id_26>
+  - <extra_id_27>
+  - <extra_id_28>
+  - <extra_id_29>
+  - <extra_id_30>
+  - <extra_id_31>
+  - <extra_id_32>
+  - <extra_id_33>
+  - <extra_id_34>
+  - <extra_id_35>
+  - <extra_id_36>
+  - <extra_id_37>
+  - <extra_id_38>
+  - <extra_id_39>
+  - <extra_id_40>
+  - <extra_id_41>
+  - <extra_id_42>
+  - <extra_id_43>
+  - <extra_id_44>
+  - <extra_id_45>
+  - <extra_id_46>
+  - <extra_id_47>
+  - <extra_id_48>
+  - <extra_id_49>
+  - <extra_id_50>
+  - <extra_id_51>
+  - <extra_id_52>
+  - <extra_id_53>
+  - <extra_id_54>
+  - <extra_id_55>
+  - <extra_id_56>
+  - <extra_id_57>
+  - <extra_id_58>
+  - <extra_id_59>
+  - <extra_id_60>
+  - <extra_id_61>
+  - <extra_id_62>
+  - <extra_id_63>
+  - <extra_id_64>
+  - <extra_id_65>
+  - <extra_id_66>
+  - <extra_id_67>
+  - <extra_id_68>
+  - <extra_id_69>
+  - <extra_id_70>
+  - <extra_id_71>
+  - <extra_id_72>
+  - <extra_id_73>
+  - <extra_id_74>
+  - <extra_id_75>
+  - <extra_id_76>
+  - <extra_id_77>
+  - <extra_id_78>
+  - <extra_id_79>
+  - <extra_id_80>
+  - <extra_id_81>
+  - <extra_id_82>
+  - <extra_id_83>
+  - <extra_id_84>
+  - <extra_id_85>
+  - <extra_id_86>
+  - <extra_id_87>
+  - <extra_id_88>
+  - <extra_id_89>
+  - <extra_id_90>
+  - <extra_id_91>
+  - <extra_id_92>
+  - <extra_id_93>
+  - <extra_id_94>
+  - <extra_id_95>
+  - <extra_id_96>
+  - <extra_id_97>
+  - <extra_id_98>
+  - <extra_id_99>
+  _bos_token: null
+  _cls_token: null
+  _decode_use_source_tokenizer: false
+  _eos_token: </s>
+  _extra_ids: 100
+  _mask_token: null
+  _pad_token: <pad>
+  _pad_token_type_id: 0
+  _processor_class: null
+  _sep_token: null
+  _unk_token: <unk>
+  added_tokens_decoder:
+    32100: __no_node__
+    32101: __no_edge__
+    32102: __node_sep__
+  added_tokens_encoder:
+    __no_edge__: 32101
+    __no_node__: 32100
+    __node_sep__: 32102
+  deprecation_warnings: {}
+  init_inputs: !!python/tuple []
+  init_kwargs:
+    additional_special_tokens:
+    - <extra_id_0>
+    - <extra_id_1>
+    - <extra_id_2>
+    - <extra_id_3>
+    - <extra_id_4>
+    - <extra_id_5>
+    - <extra_id_6>
+    - <extra_id_7>
+    - <extra_id_8>
+    - <extra_id_9>
+    - <extra_id_10>
+    - <extra_id_11>
+    - <extra_id_12>
+    - <extra_id_13>
+    - <extra_id_14>
+    - <extra_id_15>
+    - <extra_id_16>
+    - <extra_id_17>
+    - <extra_id_18>
+    - <extra_id_19>
+    - <extra_id_20>
+    - <extra_id_21>
+    - <extra_id_22>
+    - <extra_id_23>
+    - <extra_id_24>
+    - <extra_id_25>
+    - <extra_id_26>
+    - <extra_id_27>
+    - <extra_id_28>
+    - <extra_id_29>
+    - <extra_id_30>
+    - <extra_id_31>
+    - <extra_id_32>
+    - <extra_id_33>
+    - <extra_id_34>
+    - <extra_id_35>
+    - <extra_id_36>
+    - <extra_id_37>
+    - <extra_id_38>
+    - <extra_id_39>
+    - <extra_id_40>
+    - <extra_id_41>
+    - <extra_id_42>
+    - <extra_id_43>
+    - <extra_id_44>
+    - <extra_id_45>
+    - <extra_id_46>
+    - <extra_id_47>
+    - <extra_id_48>
+    - <extra_id_49>
+    - <extra_id_50>
+    - <extra_id_51>
+    - <extra_id_52>
+    - <extra_id_53>
+    - <extra_id_54>
+    - <extra_id_55>
+    - <extra_id_56>
+    - <extra_id_57>
+    - <extra_id_58>
+    - <extra_id_59>
+    - <extra_id_60>
+    - <extra_id_61>
+    - <extra_id_62>
+    - <extra_id_63>
+    - <extra_id_64>
+    - <extra_id_65>
+    - <extra_id_66>
+    - <extra_id_67>
+    - <extra_id_68>
+    - <extra_id_69>
+    - <extra_id_70>
+    - <extra_id_71>
+    - <extra_id_72>
+    - <extra_id_73>
+    - <extra_id_74>
+    - <extra_id_75>
+    - <extra_id_76>
+    - <extra_id_77>
+    - <extra_id_78>
+    - <extra_id_79>
+    - <extra_id_80>
+    - <extra_id_81>
+    - <extra_id_82>
+    - <extra_id_83>
+    - <extra_id_84>
+    - <extra_id_85>
+    - <extra_id_86>
+    - <extra_id_87>
+    - <extra_id_88>
+    - <extra_id_89>
+    - <extra_id_90>
+    - <extra_id_91>
+    - <extra_id_92>
+    - <extra_id_93>
+    - <extra_id_94>
+    - <extra_id_95>
+    - <extra_id_96>
+    - <extra_id_97>
+    - <extra_id_98>
+    - <extra_id_99>
+    clean_up_tokenization_spaces: true
+    eos_token: </s>
+    extra_ids: 100
+    model_max_length: 512
+    name_or_path: t5-small
+    pad_token: <pad>
+    sp_model_kwargs: {}
+    special_tokens_map_file: null
+    unk_token: <unk>
+  model_input_names:
+  - input_ids
+  - attention_mask
+  model_max_length: 512
+  name_or_path: t5-small
+  padding_side: right
+  sp_model: null
+  sp_model_kwargs: {}
+  tokens_trie: !!python/object:transformers.tokenization_utils.Trie
+    data:
+      <:
+        /:
+          s:
+            '>':
+              ? ''
+              : 1
+        e:
+          x:
+            t:
+              r:
+                a:
+                  _:
+                    i:
+                      d:
+                        _:
+                          '0':
+                            '>':
+                              ? ''
+                              : 1
+                          '1':
+                            '0':
+                              '>':
+                                ? ''
+                                : 1
+                            '1':
+                              '>':
+                                ? ''
+                                : 1
+                            '2':
+                              '>':
+                                ? ''
+                                : 1
+                            '3':
+                              '>':
+                                ? ''
+                                : 1
+                            '4':
+                              '>':
+                                ? ''
+                                : 1
+                            '5':
+                              '>':
+                                ? ''
+                                : 1
+                            '6':
+                              '>':
+                                ? ''
+                                : 1
+                            '7':
+                              '>':
+                                ? ''
+                                : 1
+                            '8':
+                              '>':
+                                ? ''
+                                : 1
+                            '9':
+                              '>':
+                                ? ''
+                                : 1
+                            '>':
+                              ? ''
+                              : 1
+                          '2':
+                            '0':
+                              '>':
+                                ? ''
+                                : 1
+                            '1':
+                              '>':
+                                ? ''
+                                : 1
+                            '2':
+                              '>':
+                                ? ''
+                                : 1
+                            '3':
+                              '>':
+                                ? ''
+                                : 1
+                            '4':
+                              '>':
+                                ? ''
+                                : 1
+                            '5':
+                              '>':
+                                ? ''
+                                : 1
+                            '6':
+                              '>':
+                                ? ''
+                                : 1
+                            '7':
+                              '>':
+                                ? ''
+                                : 1
+                            '8':
+                              '>':
+                                ? ''
+                                : 1
+                            '9':
+                              '>':
+                                ? ''
+                                : 1
+                            '>':
+                              ? ''
+                              : 1
+                          '3':
+                            '0':
+                              '>':
+                                ? ''
+                                : 1
+                            '1':
+                              '>':
+                                ? ''
+                                : 1
+                            '2':
+                              '>':
+                                ? ''
+                                : 1
+                            '3':
+                              '>':
+                                ? ''
+                                : 1
+                            '4':
+                              '>':
+                                ? ''
+                                : 1
+                            '5':
+                              '>':
+                                ? ''
+                                : 1
+                            '6':
+                              '>':
+                                ? ''
+                                : 1
+                            '7':
+                              '>':
+                                ? ''
+                                : 1
+                            '8':
+                              '>':
+                                ? ''
+                                : 1
+                            '9':
+                              '>':
+                                ? ''
+                                : 1
+                            '>':
+                              ? ''
+                              : 1
+                          '4':
+                            '0':
+                              '>':
+                                ? ''
+                                : 1
+                            '1':
+                              '>':
+                                ? ''
+                                : 1
+                            '2':
+                              '>':
+                                ? ''
+                                : 1
+                            '3':
+                              '>':
+                                ? ''
+                                : 1
+                            '4':
+                              '>':
+                                ? ''
+                                : 1
+                            '5':
+                              '>':
+                                ? ''
+                                : 1
+                            '6':
+                              '>':
+                                ? ''
+                                : 1
+                            '7':
+                              '>':
+                                ? ''
+                                : 1
+                            '8':
+                              '>':
+                                ? ''
+                                : 1
+                            '9':
+                              '>':
+                                ? ''
+                                : 1
+                            '>':
+                              ? ''
+                              : 1
+                          '5':
+                            '0':
+                              '>':
+                                ? ''
+                                : 1
+                            '1':
+                              '>':
+                                ? ''
+                                : 1
+                            '2':
+                              '>':
+                                ? ''
+                                : 1
+                            '3':
+                              '>':
+                                ? ''
+                                : 1
+                            '4':
+                              '>':
+                                ? ''
+                                : 1
+                            '5':
+                              '>':
+                                ? ''
+                                : 1
+                            '6':
+                              '>':
+                                ? ''
+                                : 1
+                            '7':
+                              '>':
+                                ? ''
+                                : 1
+                            '8':
+                              '>':
+                                ? ''
+                                : 1
+                            '9':
+                              '>':
+                                ? ''
+                                : 1
+                            '>':
+                              ? ''
+                              : 1
+                          '6':
+                            '0':
+                              '>':
+                                ? ''
+                                : 1
+                            '1':
+                              '>':
+                                ? ''
+                                : 1
+                            '2':
+                              '>':
+                                ? ''
+                                : 1
+                            '3':
+                              '>':
+                                ? ''
+                                : 1
+                            '4':
+                              '>':
+                                ? ''
+                                : 1
+                            '5':
+                              '>':
+                                ? ''
+                                : 1
+                            '6':
+                              '>':
+                                ? ''
+                                : 1
+                            '7':
+                              '>':
+                                ? ''
+                                : 1
+                            '8':
+                              '>':
+                                ? ''
+                                : 1
+                            '9':
+                              '>':
+                                ? ''
+                                : 1
+                            '>':
+                              ? ''
+                              : 1
+                          '7':
+                            '0':
+                              '>':
+                                ? ''
+                                : 1
+                            '1':
+                              '>':
+                                ? ''
+                                : 1
+                            '2':
+                              '>':
+                                ? ''
+                                : 1
+                            '3':
+                              '>':
+                                ? ''
+                                : 1
+                            '4':
+                              '>':
+                                ? ''
+                                : 1
+                            '5':
+                              '>':
+                                ? ''
+                                : 1
+                            '6':
+                              '>':
+                                ? ''
+                                : 1
+                            '7':
+                              '>':
+                                ? ''
+                                : 1
+                            '8':
+                              '>':
+                                ? ''
+                                : 1
+                            '9':
+                              '>':
+                                ? ''
+                                : 1
+                            '>':
+                              ? ''
+                              : 1
+                          '8':
+                            '0':
+                              '>':
+                                ? ''
+                                : 1
+                            '1':
+                              '>':
+                                ? ''
+                                : 1
+                            '2':
+                              '>':
+                                ? ''
+                                : 1
+                            '3':
+                              '>':
+                                ? ''
+                                : 1
+                            '4':
+                              '>':
+                                ? ''
+                                : 1
+                            '5':
+                              '>':
+                                ? ''
+                                : 1
+                            '6':
+                              '>':
+                                ? ''
+                                : 1
+                            '7':
+                              '>':
+                                ? ''
+                                : 1
+                            '8':
+                              '>':
+                                ? ''
+                                : 1
+                            '9':
+                              '>':
+                                ? ''
+                                : 1
+                            '>':
+                              ? ''
+                              : 1
+                          '9':
+                            '0':
+                              '>':
+                                ? ''
+                                : 1
+                            '1':
+                              '>':
+                                ? ''
+                                : 1
+                            '2':
+                              '>':
+                                ? ''
+                                : 1
+                            '3':
+                              '>':
+                                ? ''
+                                : 1
+                            '4':
+                              '>':
+                                ? ''
+                                : 1
+                            '5':
+                              '>':
+                                ? ''
+                                : 1
+                            '6':
+                              '>':
+                                ? ''
+                                : 1
+                            '7':
+                              '>':
+                                ? ''
+                                : 1
+                            '8':
+                              '>':
+                                ? ''
+                                : 1
+                            '9':
+                              '>':
+                                ? ''
+                                : 1
+                            '>':
+                              ? ''
+                              : 1
+        p:
+          a:
+            d:
+              '>':
+                ? ''
+                : 1
+        u:
+          n:
+            k:
+              '>':
+                ? ''
+                : 1
+      _:
+        _:
+          n:
+            o:
+              _:
+                e:
+                  d:
+                    g:
+                      e:
+                        _:
+                          _:
+                            ? ''
+                            : 1
+                n:
+                  o:
+                    d:
+                      e:
+                        _:
+                          _:
+                            ? ''
+                            : 1
+              d:
+                e:
+                  _:
+                    s:
+                      e:
+                        p:
+                          _:
+                            _:
+                              ? ''
+                              : 1
+  truncation_side: right
+  unique_no_split_tokens:
+  - </s>
+  - <extra_id_0>
+  - <extra_id_10>
+  - <extra_id_11>
+  - <extra_id_12>
+  - <extra_id_13>
+  - <extra_id_14>
+  - <extra_id_15>
+  - <extra_id_16>
+  - <extra_id_17>
+  - <extra_id_18>
+  - <extra_id_19>
+  - <extra_id_1>
+  - <extra_id_20>
+  - <extra_id_21>
+  - <extra_id_22>
+  - <extra_id_23>
+  - <extra_id_24>
+  - <extra_id_25>
+  - <extra_id_26>
+  - <extra_id_27>
+  - <extra_id_28>
+  - <extra_id_29>
+  - <extra_id_2>
+  - <extra_id_30>
+  - <extra_id_31>
+  - <extra_id_32>
+  - <extra_id_33>
+  - <extra_id_34>
+  - <extra_id_35>
+  - <extra_id_36>
+  - <extra_id_37>
+  - <extra_id_38>
+  - <extra_id_39>
+  - <extra_id_3>
+  - <extra_id_40>
+  - <extra_id_41>
+  - <extra_id_42>
+  - <extra_id_43>
+  - <extra_id_44>
+  - <extra_id_45>
+  - <extra_id_46>
+  - <extra_id_47>
+  - <extra_id_48>
+  - <extra_id_49>
+  - <extra_id_4>
+  - <extra_id_50>
+  - <extra_id_51>
+  - <extra_id_52>
+  - <extra_id_53>
+  - <extra_id_54>
+  - <extra_id_55>
+  - <extra_id_56>
+  - <extra_id_57>
+  - <extra_id_58>
+  - <extra_id_59>
+  - <extra_id_5>
+  - <extra_id_60>
+  - <extra_id_61>
+  - <extra_id_62>
+  - <extra_id_63>
+  - <extra_id_64>
+  - <extra_id_65>
+  - <extra_id_66>
+  - <extra_id_67>
+  - <extra_id_68>
+  - <extra_id_69>
+  - <extra_id_6>
+  - <extra_id_70>
+  - <extra_id_71>
+  - <extra_id_72>
+  - <extra_id_73>
+  - <extra_id_74>
+  - <extra_id_75>
+  - <extra_id_76>
+  - <extra_id_77>
+  - <extra_id_78>
+  - <extra_id_79>
+  - <extra_id_7>
+  - <extra_id_80>
+  - <extra_id_81>
+  - <extra_id_82>
+  - <extra_id_83>
+  - <extra_id_84>
+  - <extra_id_85>
+  - <extra_id_86>
+  - <extra_id_87>
+  - <extra_id_88>
+  - <extra_id_89>
+  - <extra_id_8>
+  - <extra_id_90>
+  - <extra_id_91>
+  - <extra_id_92>
+  - <extra_id_93>
+  - <extra_id_94>
+  - <extra_id_95>
+  - <extra_id_96>
+  - <extra_id_97>
+  - <extra_id_98>
+  - <extra_id_99>
+  - <extra_id_9>
+  - <pad>
+  - <unk>
+  - __no_edge__
+  - __no_node__
+  - __node_sep__
+  verbose: true
+  vocab_file: cache/65fc04e21f45f61430aea0c4fedffac16a4d20d78b8e6601d8d996ebefefecd2.3b69006860e7b5d0a63ffdddc01ddcd6b7c318a6f4fd793596552c741734c62d
+transformer_class: !!python/name:transformers.models.t5.modeling_t5.T5ForConditionalGeneration ''
+transformer_name: t5-small
+vocab_size: 32103
