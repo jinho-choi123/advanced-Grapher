@@ -8,8 +8,8 @@ wget https://github.com/jinho-choi123/advanced-Grapher/raw/refs/heads/artifact-e
 unzip webnlg-dataset.zip
 
 # install WebNLG_Text_to_triples
-wget https://github.com/jinho-choi123/advanced-Grapher/raw/refs/heads/artifact-evaluation/webnlg-WebNLG_Text_to_triples.zip?download= -O webnlg-WebNLG_Text_to_triples.zip
-unzip webnlg-WebNLG_Text_to_triples.zip
+wget https://github.com/jinho-choi123/advanced-Grapher/raw/refs/heads/artifact-evaluation/WebNLG_Text_to_triples.zip?download= -O WebNLG_Text_to_triples.zip
+unzip WebNLG_Text_to_triples.zip
 
 
 # install pretrained checkpoints
