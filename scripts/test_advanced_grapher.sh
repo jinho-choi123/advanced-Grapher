@@ -18,7 +18,7 @@ python main.py    --version 1\
                   --accumulate_grad_batches 1 \
                   --detect_anomaly True \
                   --data_path webnlg-dataset/release_v3.0/en \
-                  --checkpoint_model_id 199 \
+                  --checkpoint_model_id 114 \
                   --check_val_every_n_epoch 3 \
                   --add-rgcn  \
 
