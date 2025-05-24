@@ -10,6 +10,9 @@ from misc.utils import decode_graph
 import pprint
 from pytorch_lightning.callbacks import Callback
 import torch
+import nltk
+
+nltk.download('punkt')
 
 torch.manual_seed(42)
 

@@ -4,9 +4,10 @@ tmp_output/
 cache/
 webnlg-dataset/
 output/
+
 # corpusreader/
 # webnlg-dataset/
-# WebNLG_Text_to_triples/
+WebNLG_Text_to_triples/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,cuda,jupyternotebooks,linux,windows,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,cuda,jupyternotebooks,linux,windows,macos
