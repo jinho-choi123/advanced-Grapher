@@ -10,6 +10,12 @@
 
 </div>
 
+## Important
+For `git clone` command, disable fetching files from LFS. Due to bandwidth/storage limit, you cannot fully get the content.
+```bash
+GIT_LFS_SKIP_SMUDGE=1 git clone git@github.com:jinho-choi123/advanced-Grapher.git
+```
+
 ## Environment Setup
 We use conda to setup environment. Running `scripts/setup.sh` would be enough.
 This script will setup all the conda environments, datasets, and other 3rd-party dependencies.
