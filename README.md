@@ -16,7 +16,13 @@ For `git clone` command, disable fetching files from LFS. Due to bandwidth/stora
 GIT_LFS_SKIP_SMUDGE=1 git clone git@github.com:jinho-choi123/advanced-Grapher.git
 ```
 
-## Environment Setup
+## Running in Colab
+You can easily run this project in Colab with [`main.ipynb`](main.ipynb).
+
+## Running in your Own Machine
+
+
+### Environment Setup
 We use conda to setup environment. Running `scripts/setup.sh` would be enough.
 This script will setup all the conda environments, datasets, and other 3rd-party dependencies.
 ```bash
@@ -25,7 +31,7 @@ sh scripts/setup.sh
 
 We use WebNLG 3.0 dataset from [here](https://gitlab.com/shimorina/webnlg-dataset.git)
 
-## How to train
+### How to train
 We have two training phase:
 1. Training Grapher model
 2. Training GCN Model
@@ -38,7 +44,7 @@ sh scripts/train_grapher.sh
 sh scripts/train_rgcn.sh
 ```
 
-## How to test
+### How to test
 We already contained pretrained checkpoints at `output/webnlg_version_1/checkpoints/model-epoch=79.ckpt` and `output/webnlg_version_1/checkpoints/model-epoch=114.ckpt`.
 The script is initially configured to point to these pretrained checkpoints.
 ```bash
@@ -49,7 +55,7 @@ sh scripts/test_grapher.sh
 sh scripts/test_advanced_grapher.sh
 ```
 
-## How to run inference
+### How to run inference
 You can run single graph generation inference using following command. If you want to change the text, please modify `--inference_input_text` argument of the script.
 ```bash
 # Inference the grapher-only model.
@@ -59,13 +65,13 @@ sh scripts/inference_grapher.sh
 sh scripts/inference_advanced_grapher.sh
 ```
 
-## Results
+### Results
 Results can be visualized in Tensorboard
 ```bash
 tensorboard --logdir output
 ```
 
-### Citation
+### References
 ```
 @inproceedings{grapher2022,
   title={Knowledge Graph Generation From Text},
