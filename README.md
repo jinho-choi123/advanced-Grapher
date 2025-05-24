@@ -6,89 +6,52 @@
 2-trial Text Knowledge Graph Generation(TeKGG) suggest a novel method of generating Knowledge Graph from text.
 1. Generate first-trial Knowledge Graph using [Grapher](https://github.com/IBM/Grapher). Extract the Knowledge Graph and node embeddings.
 2. Using the extracted node embeddings and first-trial Knowledge Graph, we apply GCN message passing to aggregate node embeddings from neighbors.
+3. Using newly generated node embeddings, it is again passed to Grapher, and generate second-trial Knowledge Graph.
 
-[![Paper](https://img.shields.io/badge/Paper-ArXiv.2211.10511-blue)](https://arxiv.org/abs/2211.10511)
-[![Conference](https://img.shields.io/badge/EMNLP-2022-orange)](https://2022.emnlp.org/)
-
-<!--
-Conference
--->
 </div>
 
-## Description
-Grapher is an end-to-end multi-stage Knowledge Graph (KG) construction system, that separates the overall generation process  into  two  stages.
-<p align="center">
-  <img src="imgs/overview_grapher.png" width="50%">
-</p>
-The  graph  nodes  are generated first using pretrained language model, such as T5.The input text is transformed into a sequence of text entities. The features corresponding to each entity (node) is extracted and then sent to the edge generation module.
-<p align="center">
-  <img src="imgs/node_gen.png" width="50%">
-</p>
-Edge construction, using generation (e.g.,GRU) or a classifier head. Blue circles represent the features corresponding to the actual graph edges (solid lines) and the white circles are the features that are decoded into ⟨NO_EDGE⟩ (dashed line).
-<p align="center">
-  <img src="imgs/edges_gen.png" width="50%">
-</p>
-
-## Environment
-To run this code, please install PyTorch and Pytorch Lightning (we tested the code on Pytorch 1.13 and Pytorch Lightning 1.8.1)
-
-
-## Setup
-Setup Environment using Conda
+## Environment Setup
+We use conda to setup environment. Running `scripts/setup.sh` would be enough.
+This script will setup all the conda environments, datasets, and other 3rd-party dependencies.
 ```bash
-# setup conda environment
-conda env create -f requirements.yml -n advanced_grapher_env
-
-# activate conda environment
-conda activate advanced_grapher_env
-
+sh scripts/setup.sh
 ```
 
-Install dependencies
-```bash
-# clone project
-git clone git@github.com:jinho-choi123/advanced-Grapher.git
-
-# navigate to the directory
-cd Grapher
-
-# clone an external repository for reading the data
-git clone https://gitlab.com/webnlg/corpus-reader.git corpusreader
-
-# clone another external repositories for scoring the results
-git clone https://github.com/WebNLG/WebNLG-Text-to-triples.git WebNLG_Text_to_triples
- ```
-## Data
-
-WebNLG 3.0 dataset
- ```bash
-# download the dataset
-git clone https://gitlab.com/shimorina/webnlg-dataset.git
-```
+## Dataset
+We use WebNLG 3.0 dataset from [here](https://gitlab.com/shimorina/webnlg-dataset.git)
 
 ## How to train
-There are two scripts to run two versions of the algorithm
-```bash
-# run Grapher with the edge generation head
-sh scripts/train_gen.sh
+We have two training phase:
+1. Training Grapher model
+2. Training GCN Model
 
-# run Grapher with the classifier edge head
-sh scripts/train_class.sh
+```bash
+# Train Grapher model first
+sh scripts/train_grapher.sh
+
+# Train GCN model next
+sh scripts/train_rgcn.sh
 ```
 
 ## How to test
+We already contained pretrained checkpoints at `output/webnlg_version_1/checkpoints/model-epoch=79.ckpt` and `output/webnlg_version_1/checkpoints/model-epoch=114.ckpt`.
+The script is initially configured to point to these pretrained checkpoints.
 ```bash
-# run the test on experiment "webnlg_version_1" using latest checkpoint last.ckpt
-python main.py --run test --version 1 --default_root_dir output --data_path webnlg-dataset/release_v3.0/en
+# Test the grapher only model
+sh scripts/test_grapher.sh
 
-# run the test on experiment "webnlg_version_1" using checkpoint at iteration 5000
-python main.py --run test --version 1 --default_root_dir output --data_path webnlg-dataset/release_v3.0/en --checkpoint_model_id 5000
+# Test the advanced-grapher model
+sh scripts/test_advanced_grapher.sh
 ```
 
 ## How to run inference
+You can run single graph generation inference using following command. If you want to change the text, please modify `--inference_input_text` argument of the script.
 ```bash
-# run inference on experiment "webnlg_version_1" using latest checkpoint last.ckpt
-python main.py --run inference --version 1 --default_root_dir output --inference_input_text "Danielle Harris had a main role in Super Capers, a 98 minute long movie."
+# Inference the grapher-only model.
+sh scripts/inference_grapher.sh
+
+# Inference the advanced-grapher model.
+sh scripts/inference_advanced_grapher.sh
 ```
 
 ## Results
