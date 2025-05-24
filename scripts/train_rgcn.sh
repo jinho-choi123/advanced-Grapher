@@ -6,7 +6,7 @@ python main.py    --version 1\
                   --accelerator gpu \
                   --num_nodes 1 \
                   --devices "0," \
-                  --batch_size 120 \
+                  --batch_size 100 \
                   --num_sanity_val_steps 0 \
                   --fast_dev_run 0 \
                   --overfit_batches 0 \
